@@ -4,7 +4,7 @@
   "description": "voicer ======",
   "main": "index.js",
   "dependencies": {
-    "asterisk.io": "^0.1.1",
+    "ding-dong": "0.0.3",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
   },
