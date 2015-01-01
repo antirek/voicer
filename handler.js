@@ -23,7 +23,7 @@ var handler = function (context, debug) {
             
             context.sayDigits("1", '#', function (err, result) {
                 if (debug) console.log(err, result);
-                filename = config.directory + '/' + uuid.v4();               
+                filename = config.directory + '/' + uuid.v4();
                 
                 context.recordFile(filename, type, '#', 10, function (err, result) {
                 if (debug) console.log(err, result);
@@ -46,7 +46,7 @@ var handler = function (context, debug) {
                                         f.lookup(res, function (err, peername) {
                                             if (debug) console.log(err, peername);
 
-                                            if (!err) {                                                
+                                            if (!err) {
                                                 if (debug) console.log(peername);
 
                                                 context.sayDigits(peername, '#', function (err, result) {
@@ -61,7 +61,7 @@ var handler = function (context, debug) {
                                             } else {
                                                 context.end()
                                             }
-                                            
+
                                         });
 
                                     } else {
