@@ -1,10 +1,11 @@
 {
   "name": "voicer",
   "version": "0.0.1",
-  "description": "voicer ======",
+  "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
     "ding-dong": "0.0.3",
+    "node-uuid": "^1.4.2",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
   },

@@ -1,8 +1,13 @@
 
-var config = require('./config');
+var config = require('./config'),
+    agiServer = require('ding-dong'),
+    handler = require('./handler');
 
-var agiServer = require('ding-dong');
+var debug = true;
 
-var handler = require('./handler');
 
-agiServer.createServer(handler).listen(config.port);
+agiServer
+.createServer(function (context) {
+    handler(context, debug);
+})
+.listen(config.port);
