@@ -1,4 +1,4 @@
 voicer
 ======
 
-AGI yandex voce recognizer
+AGI yandex voice recognizer
