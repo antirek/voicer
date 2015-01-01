@@ -2,15 +2,19 @@ var yandex_speech = require('yandex-speech'),
     xml2js = require('xml2js'),
     config = require('./config'),
     path = require('path'),
-    uuid = require('node-uuid');
+    uuid = require('node-uuid'),
+    finder = require('./finder');
 
-var parser = new xml2js.Parser();
+var parser = new xml2js.Parser(),
+    storage = new finder();
 
 var filename = null, 
     type = 'wav';
 
+var f = new finder();
 
-var handler = function(context, debug) {
+
+var handler = function (context, debug) {
     context.on('variables', function (vars) {
         if (debug) console.log(vars);
 
@@ -19,7 +23,7 @@ var handler = function(context, debug) {
             
             context.sayDigits("1", '#', function (err, result) {
                 if (debug) console.log(err, result);
-                filename = config.directory + '/' + uuid.v4();                
+                filename = config.directory + '/' + uuid.v4();               
                 
                 context.recordFile(filename, type, '#', 10, function (err, result) {
                 if (debug) console.log(err, result);
@@ -34,24 +38,36 @@ var handler = function(context, debug) {
 
                                 parser.parseString(xml, function (err, result) {
                                     if (debug) console.log('parse xml callback', err, result);
-                                    if(result.recognitionResults.success == 1) {
+                                    var success = result.recognitionResults.$.success;
+                                    console.log(success, success === '1');
+                                    if(success === '1') {
                                         var res = result.recognitionResults.variant[0]._;
-                                        res = parseInt(res.replace(/ /g,""));
-                                        if (debug) console.log(res);
 
-                                        context.sayDigits(res, '#', function (err, result) {
-                                            if (debug) console.log(err, result);
+                                        f.lookup(res, function (err, peername) {
+                                            if (debug) console.log(err, peername);
 
-                                            context.dial('SIP/' + res, function (err, result) {
-                                                if (debug) console.log(err, result);
+                                            if (!err) {                                                
+                                                if (debug) console.log(peername);
 
-                                                context.end();
-                                            });
+                                                context.sayDigits(peername, '#', function (err, result) {
+                                                    if (debug) console.log(err, result);
+
+                                                    context.dial('SIP/' + peername, function (err, result) {
+                                                        if (debug) console.log(err, result);
+
+                                                        context.end();
+                                                    });
+                                                });
+                                            } else {
+                                                context.end()
+                                            }
+                                            
                                         });
-                                      } else {
-                                          if(debug) console.log('no success');
-                                          context.end();
-                                      }
+
+                                    } else {
+                                        if(debug) console.log('no success');
+                                        context.end();
+                                    }
                                 });
                             }
                         }
