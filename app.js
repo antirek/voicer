@@ -17,6 +17,19 @@ agi.on('close', function(){
 });
 
 agi.on('connection', function(agiHandler){  
-  console.log(agiHandler);
-  agiHandler.close();
+    console.log(agiHandler);
+    
+    agiHandler.command('ANSWER', function(code, result, data){
+        console.log(code, result, data);
+        
+        agiHandler.command('Say Date "1414330073" ""', function(code, result, data){
+            console.log(code, result, data);
+
+            agiHandler.command('RECORD FILE /tmp/2 wav # 10000 0 1 2', function(code, result, data){
+                console.log(code, result, data);
+
+                agiHandler.close();
+            });
+        });
+    });
 });
