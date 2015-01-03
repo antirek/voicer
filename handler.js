@@ -137,29 +137,37 @@ var handler = function (context, debug) {
         var stepFinish = function () {
             q.end(function () {
                 if(debug) console.log('end');
-            })
+            });
         };
+
+        var stepError = function (){
+            q.sayDigits('9', '#', function (err, result) {
+                q.end(function () {
+                    if(debug) console.log('end');
+                });
+            });
+        }
 
         var main = function () {
             stepGreeting(function (err, result) {
-                if (err) { stepFinish(); }
+                if (err) { stepError(); }
                 
                 stepRecord(function (err, result) {
-                    if (err) { stepFinish(); }
+                    if (err) { stepError(); }
                     
                     stepRecognize(result.filename + '.' + type, function (err, result) {
-                        if (err) { stepFinish(); }
+                        if (err) { stepError(); }
 
                         stepParseRecognize(result.data, function (err, result) {
-                            if (err) { 
-                                stepFinish();
-                            }else{
+                            if (err) { stepError(); }
+                            else{
                                 stepLookup(result.text, function (err, result) {
-                                    if (err) { stepFinish(); }
-
-                                    stepDial(result.peername, function (err, result) {
-                                        stepFinish();
-                                    });
+                                    if (err) { stepError(); }
+                                    else {
+                                        stepDial(result.peername, function (err, result) {
+                                            stepFinish();
+                                        });
+                                    }
                                 });  
                             }
                         });
