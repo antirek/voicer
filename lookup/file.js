@@ -10,17 +10,23 @@ var file = function (options) {
     var getDataFile = function(){
         var datafile = options['dataFile'] || 'data/peernames.json';
         return path.resolve(datafile);
-    }
+    };
 
     var lookup = function (text, callback) {
         var encoding = "utf8";
         var filepath = getDataFile();
-        console.log(filepath);
+      
         fs.readFile(filepath, encoding, function (err, data){
-            data = JSON.parse(data);
-            var key = text.toLowerCase();            
-            var peername = data[key] || null;
+            var peername = null, key;
             
+            try {
+                data = JSON.parse(data);
+                key = text.toLowerCase();
+                peername = data[key];
+            } catch (err) {
+                callback(err);
+            }
+
             if (peername) {
                 callback(null, {peername: peername});
             } else {
