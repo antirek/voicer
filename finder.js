@@ -1,29 +1,20 @@
 
-var finder = function () {
-
-    var lookup = function (text, callback) {
-
-        var object = {
-            "иван": "100",
-            "вася": "1060",
-            "катя": '123'
-        };
-
-        text = text.toLowerCase();
-
-        var peername = object[text] || null;
-        
-        if(peername){
-            callback(null, {peername: peername});
-        } else {
-            callback(new Error('Not found'));
+function finder (connection) {
+    if (connection && connection['type']) {
+        switch (connection['type']){            
+            case 'file':
+                this.dataSource = new require('./lookup/file')(connection['options']);
+                break;
+            default:
+                throw new Error('Unknown type of connection');
         }
-    }
+    } else {
+        this.dataSource = new require('./lookup/file')();
+    }    
+};
 
-    return {
-      lookup: lookup
-    }
-}
-
+finder.prototype.lookup = function (text, callback) {
+    this.dataSource.lookup(text, callback);     
+};
 
 module.exports = finder;
