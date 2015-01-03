@@ -14,21 +14,6 @@ var filename = null,
 var f = new finder();
 
 
-var recognize = function (filepath, debug, callback) {
-    yandex_speech.ASR({
-        developer_key: config.yandex_key,
-        file: filepath,
-        filetype: 'audio/x-wav'
-        }, function (err, httpResponse, xml) {
-            if (debug) console.log(httpResponse.statusCode, xml);
-            callback(err, {
-                code: httpResponse.statusCode, 
-                data: xml
-            })
-        });
-}
-
-
 var Q = function (context, debug) {
 
     var answer = function (callback) {
@@ -83,65 +68,107 @@ var handler = function (context, debug) {
 
         var q = new Q(context, debug);
 
-        var stepStart = function () {
-
+        var stepGreeting = function (callback) {
             q.answer(function (err, result) {
-
                 q.sayDigits("1", '#', function (err, result) {
-
-                    filename = config.directory + '/' + uuid.v4();
-                    
-                    q.recordFile(filename, type, '#', 10, function (err, result) {
-
-                        recognize(filename + '.' + type, debug, function (err, result) {
-                            if (!err) {
-                                stepParseRecognize(result.data, function(){
-                                    f.lookup(res, function (err, peername) {
-                                        if (debug) console.log(err, peername);
-
-                                        if (!err) {
-                                            if (debug) console.log(peername);
-
-                                            context.sayDigits(peername, '#', function (err, result) {
-                                                if (debug) console.log(err, result);
-
-
-                                                q.dial(peername);
-                                            });
-                                        } else {
-                                            context.end()
-                                        }
-
-                                    });
-
-                                });
-                            }
-                        });
-                    });
+                    callback(err, result);
                 });
             });
-        }
+        };
 
-        var stepParseRecognize = function(data, callback){
+        var stepRecognize = function (filepath, callback) {
+            yandex_speech.ASR({
+                developer_key: config.yandex_key,
+                file: filepath,
+                filetype: 'audio/x-wav'
+                }, function (err, httpResponse, xml) {
+                    if (debug) console.log(httpResponse.statusCode, xml);
+                    callback(err, {
+                        code: httpResponse.statusCode, 
+                        data: xml
+                    })
+                });
+        };
+
+        var stepRecord = function (callback) {
+            filename = config.directory + '/' + uuid.v4();
+            q.recordFile(filename, type, '#', 10, function (err, result) {                
+                if(!err) callback(err, {filename: filename});
+            });
+        };
+
+        var stepParseRecognize = function (data, callback) {
+
             parser.parseString(data, function (err, result) {
-
+                var success = null;
                 if (debug) console.log('parse xml callback', err, result);
-                var success = result.recognitionResults.$.success;
+                try {
+                  success = result.recognitionResults.$.success;
+                } catch (err) {}
 
                 if (debug) console.log(success, success === '1');
 
                 if(success === '1') {
                     var res = result.recognitionResults.variant[0]._;
-                    callback(null, res);
-
+                    callback(null, {text: res});
                 } else {
                     if(debug) console.log('no success');
-                    stepStart();
+                    callback(new Error('No parse result'));
                 }
             });
         };
 
-        stepStart();
+        var stepLookup = function (text, callback) {
+            f.lookup(text, function (err, result) {
+                if (debug) console.log(err, result);
+                callback(err, result);
+            });
+        };
+
+
+        var stepDial = function (peername, callback) {
+            q.sayDigits(peername, '#', function (err, result) {
+                q.dial(peername, function (err, result) {
+                    callback(err, result);
+                });
+            });
+        }
+
+        var stepFinish = function () {
+            q.end(function () {
+                if(debug) console.log('end');
+            })
+        };
+
+        var main = function () {
+            stepGreeting(function (err, result) {
+                if (err) { stepFinish(); }
+                
+                stepRecord(function (err, result) {
+                    if (err) { stepFinish(); }
+                    
+                    stepRecognize(result.filename + '.' + type, function (err, result) {
+                        if (err) { stepFinish(); }
+
+                        stepParseRecognize(result.data, function (err, result) {
+                            if (err) { 
+                                stepFinish();
+                            }else{
+                                stepLookup(result.text, function (err, result) {
+                                    if (err) { stepFinish(); }
+
+                                    stepDial(result.peername, function (err, result) {
+                                        stepFinish();
+                                    });
+                                });  
+                            }
+                        });
+                    });
+                });
+            });
+        };
+
+        main();
     });
 }
 

@@ -14,7 +14,7 @@ var finder = function () {
         var peername = object[text] || null;
         
         if(peername){
-            callback(null, peername);
+            callback(null, {peername: peername});
         } else {
             callback(new Error('Not found'));
         }
