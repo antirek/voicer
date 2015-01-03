@@ -1,35 +1,33 @@
 voicer
 ======
 
-AGI yandex voice recognizer
+AGI yandex voice recognizer for Asterisk
 
-Call to directory, say "Vasya" and asterisk call to Vasya number!
+Call to special extension, say "Vasya" and Asterisk connect you with Vasya! Excellent!
 
 
 Install
 =======
 
-Step 1
+## Step 1. Copy app to your server ##
 
-Copy app to your server
+> $ git clone https://github.com/antirek/voicer.git
 
-> git clone https://github.com/antirek/voicer.git
+> $ cd voicer
 
-> cd voicer
-
-> npm install
+> $ npm install
 
 
-Tune app via *config.js*
+## Step 2. Tune app via *config.js* ##
 
-1. set yandex developer key ()[]
+1. set yandex developer key (https://developer.tech.yandex.ru/)
 
 2. set finder for lookup your peers [db, plain file]
 
 
-Tune asterisk
+## Step 3. Tune asterisk ##
 
-add to asterisk extensions.conf
+add to *extensions.conf* like this
 
 ``````
 [default]
@@ -38,7 +36,9 @@ exten = > 1000,1,AGI(agi://localhost:3000)
 ASTERISK CLI> dialplan reload
 
 
-And run app
+## Step 4. Run app ##
+
+from dir of 'voicer'
 
 > node app.js
 

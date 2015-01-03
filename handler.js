@@ -93,7 +93,7 @@ var handler = function (context, debug) {
         var stepRecord = function (callback) {
             filename = config.directory + '/' + uuid.v4();
             q.recordFile(filename, type, '#', 10, function (err, result) {                
-                if(!err) callback(err, {filename: filename});
+                if(!err) callback(err, {filename: filename}); 
             });
         };
 
