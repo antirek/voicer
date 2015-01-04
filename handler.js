@@ -1,3 +1,5 @@
+'use strict';
+
 var yandex_speech = require('yandex-speech'),
     xml2js = require('xml2js'),
     config = require('./config'),
@@ -43,7 +45,14 @@ var Q = function (context, debug) {
     };
 
     var recordFile = function (filepath, type, escape_digits, duration, callback) {
-        context.recordFile(filename, type, escape_digits, duration, function (err, result) {
+        context.recordFile(filepath, type, escape_digits, duration, function (err, result) {
+            if (debug) console.log(err, result);
+            callback(err, result);
+        });
+    };
+
+    var streamFile = function (filepath, escape_digits, callback) {
+        context.streamFile(filepath, escape_digits, function (err, result) {
             if (debug) console.log(err, result);
             callback(err, result);
         });
@@ -54,7 +63,8 @@ var Q = function (context, debug) {
         dial: dial,
         end: end,
         sayDigits: sayDigits,
-        recordFile: recordFile
+        recordFile: recordFile,
+        streamFile: streamFile,
     };
 };
 
@@ -62,7 +72,7 @@ var Q = function (context, debug) {
 
 
 var handler = function (context, debug) {
-    context.on('variables', function (vars) {        
+    context.on('variables', function (vars) {
 
         if (debug) console.log(vars);
 
@@ -70,16 +80,17 @@ var handler = function (context, debug) {
 
         var stepGreeting = function (callback) {
             q.answer(function (err, result) {
-                q.sayDigits("1", '#', function (err, result) {
+                q.streamFile("beep", '#', function (err, result) {
                     callback(err, result);
                 });
             });
         };
 
-        var stepRecognize = function (filepath, callback) {
+        var stepRecognize = function (options, callback) {
+            var file = options['filename'] + '.' + options['type'];
             yandex_speech.ASR({
                 developer_key: config.yandex_key,
-                file: filepath,
+                file: file,
                 filetype: 'audio/x-wav'
                 }, function (err, httpResponse, xml) {
                     if (debug) console.log(httpResponse.statusCode, xml);
@@ -93,24 +104,27 @@ var handler = function (context, debug) {
         var stepRecord = function (callback) {
             filename = config.directory + '/' + uuid.v4();
             q.recordFile(filename, type, '#', 10, function (err, result) {                
-                if(!err) callback(err, {filename: filename}); 
+                if(!err) callback(err, {
+                  filename: filename, 
+                  type: type
+                }); 
             });
         };
 
-        var stepParseRecognize = function (data, callback) {
+        var stepParseRecognize = function (options, callback) {
 
-            parser.parseString(data, function (err, result) {
+            parser.parseString(options['data'], function (err, result) {
                 var success = null;
                 if (debug) console.log('parse xml callback', err, result);
+
                 try {
-                  success = result.recognitionResults.$.success;
+                    success = result.recognitionResults.$.success;
                 } catch (err) {}
 
                 if (debug) console.log(success, success === '1');
 
-                if(success === '1') {
-                    var res = result.recognitionResults.variant[0]._;
-                    callback(null, {text: res});
+                if (success === '1') {                    
+                    callback(null, {text: result.recognitionResults.variant[0]._});
                 } else {
                     if(debug) console.log('no success');
                     callback(new Error('No parse result'));
@@ -118,17 +132,17 @@ var handler = function (context, debug) {
             });
         };
 
-        var stepLookup = function (text, callback) {
-            f.lookup(text, function (err, result) {
+        var stepLookup = function (options, callback) {
+            f.lookup(options['text'], function (err, result) {
                 if (debug) console.log(err, result);
                 callback(err, result);
             });
         };
 
 
-        var stepDial = function (peername, callback) {
-            q.sayDigits(peername, '#', function (err, result) {
-                q.dial(peername, function (err, result) {
+        var stepDial = function (options, callback) {
+            q.sayDigits(options['peername'], '#', function (err, result) {
+                q.dial(options['peername'], function (err, result) {
                     callback(err, result);
                 });
             });
@@ -141,7 +155,7 @@ var handler = function (context, debug) {
         };
 
         var stepError = function (){
-            q.sayDigits('9', '#', function (err, result) {
+            q.streamFile('invalid', '#', function (err, result) {
                 q.end(function () {
                     if(debug) console.log('end');
                 });
@@ -155,16 +169,16 @@ var handler = function (context, debug) {
                 stepRecord(function (err, result) {
                     if (err) { stepError(); }
                     
-                    stepRecognize(result.filename + '.' + type, function (err, result) {
+                    stepRecognize(result, function (err, result) {
                         if (err) { stepError(); }
 
-                        stepParseRecognize(result.data, function (err, result) {
+                        stepParseRecognize(result, function (err, result) {
                             if (err) { stepError(); }
                             else{
-                                stepLookup(result.text, function (err, result) {
+                                stepLookup(result, function (err, result) {
                                     if (err) { stepError(); }
                                     else {
-                                        stepDial(result.peername, function (err, result) {
+                                        stepDial(result, function (err, result) {
                                             stepFinish();
                                         });
                                     }

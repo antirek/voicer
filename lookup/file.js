@@ -22,7 +22,7 @@ var file = function (options) {
             try {
                 data = JSON.parse(data);
                 key = text.toLowerCase();
-                peername = data[key];
+                peername = data[key];                
             } catch (err) {
                 callback(err);
             }
