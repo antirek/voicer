@@ -58,6 +58,13 @@ var Q = function (context, debug) {
         });
     };
 
+    var sayPhonetic = function (string, escape_digits, callback) {
+        context.sayPhonetic(string, escape_digits, function (err, result) {
+            if (debug) console.log(err, result);
+            callback(err, result);
+        });
+    };
+
     return {
         answer: answer,
         dial: dial,
@@ -65,6 +72,7 @@ var Q = function (context, debug) {
         sayDigits: sayDigits,
         recordFile: recordFile,
         streamFile: streamFile,
+        sayPhonetic: sayPhonetic,
     };
 };
 
@@ -141,7 +149,7 @@ var handler = function (context, debug) {
 
 
         var stepDial = function (options, callback) {
-            q.sayDigits(options['peername'], '#', function (err, result) {
+            q.sayPhonetic(options['peername'], '#', function (err, result) {
                 q.dial(options['peername'], function (err, result) {
                     callback(err, result);
                 });
