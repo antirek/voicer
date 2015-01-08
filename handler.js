@@ -7,6 +7,10 @@ var yandex_speech = require('yandex-speech'),
     uuid = require('node-uuid'),
     finder = require('./finder');
 
+var async = require('async');
+
+
+
 var parser = new xml2js.Parser(),
     storage = new finder();
 
@@ -168,37 +172,49 @@ var handler = function (context, debug) {
                     if(debug) console.log('end');
                 });
             });
-        }
+        };        
 
-        var main = function () {
-            stepGreeting(function (err, result) {
-                if (err) { stepError(); }
-                
+        async.waterfall([
+            function (callback) {
+                stepGreeting(function (err, result) {
+                    if (err) { stepError(); }
+                    else { callback(null, result); }
+                });    
+            },
+            function (result, callback) {                
                 stepRecord(function (err, result) {
                     if (err) { stepError(); }
-                    
-                    stepRecognize(result, function (err, result) {
-                        if (err) { stepError(); }
-
-                        stepParseRecognize(result, function (err, result) {
-                            if (err) { stepError(); }
-                            else{
-                                stepLookup(result, function (err, result) {
-                                    if (err) { stepError(); }
-                                    else {
-                                        stepDial(result, function (err, result) {
-                                            stepFinish();
-                                        });
-                                    }
-                                });  
-                            }
-                        });
-                    });
+                    else { callback(null, result); }
                 });
-            });
-        };
-
-        main();
+            },
+            function (result, callback) {                
+                stepRecognize(result, function (err, result) {
+                    if (err) { stepError(); }
+                    else { callback(null, result); }
+                });
+            },
+            function (result, callback) {                
+                stepParseRecognize(result, function (err, result) {
+                    if (err) { stepError(); }
+                    else { callback(null, result); }
+                });
+            },
+            function (result, callback) {
+                stepLookup(result, function (err, result) {
+                    if (err) { stepError(); }
+                    else { callback(null, result); }
+                });
+            },
+            function (result, callback) {                
+                stepDial(result, function (err, result) {
+                    if (err) { stepError(); }
+                    else { callback(null, result); }
+                });
+            },
+            function (result) {
+                stepFinish();
+            }
+        ]);
     });
 }
 

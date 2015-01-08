@@ -4,7 +4,8 @@
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
-    "ding-dong": "0.0.3",
+    "async": "^0.9.0",
+    "ding-dong": "0.0.4",
     "node-uuid": "^1.4.2",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
