@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "async": "^0.9.0",
-    "ding-dong": "0.0.4",
+    "ding-dong": "0.0.5",
     "node-uuid": "^1.4.2",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
