@@ -81,8 +81,6 @@ var Q = function (context, debug) {
 };
 
 
-
-
 var handler = function (context, debug) {
     context.on('variables', function (vars) {
 
@@ -99,7 +97,7 @@ var handler = function (context, debug) {
         };
 
         var stepRecognize = function (options, callback) {
-            var file = options['filename'] + '.' + options['type'];
+            var file = config.directory_recognize + '/' + options['filename'] + '.' + options['type'];
             yandex_speech.ASR({
                 developer_key: config.yandex_key,
                 file: file,
@@ -114,10 +112,11 @@ var handler = function (context, debug) {
         };
 
         var stepRecord = function (callback) {
-            filename = config.directory + '/' + uuid.v4();
-            q.recordFile(filename, type, '#', 10, function (err, result) {                
+            filename = uuid.v4();
+            filepath = config.directory_record + '/' + filename;
+            q.recordFile(filepath, type, '#', 10, function (err, result) {                
                 if(!err) callback(err, {
-                  filename: filename, 
+                  filename: filename,
                   type: type
                 }); 
             });
@@ -172,7 +171,7 @@ var handler = function (context, debug) {
                     if(debug) console.log('end');
                 });
             });
-        };        
+        }; 
 
         async.waterfall([
             function (callback) {
