@@ -29,6 +29,13 @@ var Q = function (context, debug) {
         });
     };
 
+    var hangup = function (callback) {
+        context.hangup(function (err, result) {
+            if (debug) console.log(err, result);            
+            callback(err, result);
+        });
+    };
+
     var end = function (callback) {
         context.end();
         callback();
@@ -69,6 +76,13 @@ var Q = function (context, debug) {
         });
     };
 
+    var setVariable = function (variable, value, callback) {
+        context.setVariable(variable, value, function (err, result) {
+            if (debug) console.log(err, result);
+            callback(err, result);
+        });
+    };
+
     return {
         answer: answer,
         dial: dial,
@@ -77,6 +91,8 @@ var Q = function (context, debug) {
         recordFile: recordFile,
         streamFile: streamFile,
         sayPhonetic: sayPhonetic,
+        setVariable: setVariable,
+        hangup: hangup
     };
 };
 
@@ -113,8 +129,8 @@ var handler = function (context, debug) {
 
         var stepRecord = function (callback) {
             filename = uuid.v4();
-            filepath = config.directory_record + '/' + filename;
-            q.recordFile(filepath, type, '#', 10, function (err, result) {                
+            var filepath = config.directory_record + '/' + filename;
+            q.recordFile(filepath, type, '#', 1, function (err, result) {                
                 if(!err) callback(err, {
                   filename: filename,
                   type: type
@@ -152,17 +168,19 @@ var handler = function (context, debug) {
 
 
         var stepDial = function (options, callback) {
-            q.sayPhonetic(options['peername'], '#', function (err, result) {
-                q.dial(options['peername'], function (err, result) {
-                    callback(err, result);
-                });
+            //q.sayPhonetic(options['peername'], '#', function (err, result) {
+            q.dial(options['peername'], function (err, result) {
+                callback(err, result);
             });
+            //});
         }
 
         var stepFinish = function () {
-            q.end(function () {
-                if(debug) console.log('end');
-            });
+            //q.hangup(function () {
+                q.end(function () {
+                    if(debug) console.log('end');
+                });
+            //});
         };
 
         var stepError = function (){
