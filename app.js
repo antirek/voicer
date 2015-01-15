@@ -1,10 +1,9 @@
 
 var config = require('./config'),
     agiServer = require('ding-dong'),
-    handler = require('./handler');
+    handler = require('./lib/handler');
 
-var debug = true;
-
+var debug = config['debug'];
 
 agiServer
 .createServer(function (context) {
