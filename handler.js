@@ -58,7 +58,7 @@ var handler = function (context, debug) {
         };
 
         var stepDial = function (options, callback) {
-            context.dial('SIP/' + options['peername'], function (err, result) {
+            context.dial(options['channel'], function (err, result) {
                 callback(err, result);
             });            
         };
@@ -106,6 +106,7 @@ var handler = function (context, debug) {
             },
             function (result, callback) {
                 stepDial(result, function (err, result) {
+                    console.log('result dial', result)
                     if (err) { stepError(); }
                     else { callback(null, result); }
                 });

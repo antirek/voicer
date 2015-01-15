@@ -17,18 +17,18 @@ var file = function (options) {
         var filepath = getDataFile();
       
         fs.readFile(filepath, encoding, function (err, data){
-            var peername = null, key;
+            var channel = null, key;
             
             try {
                 data = JSON.parse(data);
                 key = text.toLowerCase();
-                peername = data[key];                
+                channel = data[key];                
             } catch (err) {
                 callback(err);
             }
 
-            if (peername) {
-                callback(null, {peername: peername});
+            if (channel) {
+                callback(null, {channel: channel});
             } else {
                 callback(new Error('Not found'));
             }

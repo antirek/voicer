@@ -3,12 +3,15 @@ module.exports = {
     record: {    	
     	directory: '/tmp',
     	type: 'wav',
-    	duration: 1,
+    	duration: 2,
     },
     recognize: {
     	directory: '/tmp2',
-    	type: 'yandex',
-    	developer_key: '3b7b9fba-cbcd-47d1-854a-XXXXXXXXXXXX'
+    	type: 'yandex',  //'yandex', 'google'
+    	options: {
+    		//developer_key: ''
+    		developer_key: ''
+    	}
     },
     lookup: {
         type: 'file',

@@ -7,14 +7,14 @@ var google = function (options) {
     var developer_key = options['developer_key'];
 
     var parse = function (options, callback) {
-            var data = JSON.parse(options.data.replace('{"result":[]}\n', ''));
-            
-            if (data.result) {
-                var recognized = data.result[0].alternative[0].transcript;
-                callback(null, {text: recognized});
-            } else {                
-                callback(new Error('No parse result'));
-            }
+        var data = JSON.parse(options.data.replace('{"result":[]}\n', ''));
+        
+        if (data.result) {
+            var recognized = data.result[0].alternative[0].transcript;
+            callback(null, {text: recognized});
+        } else {                
+            callback(new Error('No parse result'));
+        }
     };
 
     var recognize = function (file, callback) {
