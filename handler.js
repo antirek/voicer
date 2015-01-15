@@ -1,15 +1,14 @@
 'use strict';
 
-var config = require('./config'),
-    path = require('path'),
+var path = require('path'),
     uuid = require('node-uuid'),
+    async = require('async');
+
+var config = require('./config'),
     Finder = require('./finder'),
     Recognizer = require('./recognizer');
-
-var async = require('async');
-
-var filename = null, 
-    f = new Finder(),
+    
+var finder = new Finder(),
     recognizer = new Recognizer(config['recognize']);
 
 
@@ -51,7 +50,7 @@ var handler = function (context, debug) {
         };
       
         var stepLookup = function (options, callback) {
-            f.lookup(options['text'], function (err, result) {
+            finder.lookup(options['text'], function (err, result) {
                 if (debug) console.log(err, result);
                 callback(err, result);
             });

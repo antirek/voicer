@@ -7,14 +7,14 @@ var file = function (options) {
 
     if (!options) options = {};
 
-    var getDataFile = function(){
+    var getDataFile = function () {
         var datafile = options['dataFile'] || 'data/peernames.json';
         return path.resolve(datafile);
     };
 
     var lookup = function (text, callback) {
-        var encoding = "utf8";
-        var filepath = getDataFile();
+        var encoding = "utf8",
+            filepath = getDataFile();
       
         fs.readFile(filepath, encoding, function (err, data){
             var channel = null, key;
@@ -37,8 +37,7 @@ var file = function (options) {
 
     return {
         lookup: lookup
-    }
+    };
 }
-
 
 module.exports = file;

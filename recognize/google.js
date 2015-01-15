@@ -7,6 +7,7 @@ var google = function (options) {
     var developer_key = options['developer_key'];
 
     var parse = function (options, callback) {
+
         var data = JSON.parse(options.data.replace('{"result":[]}\n', ''));
         
         if (data.result) {
@@ -36,6 +37,5 @@ var google = function (options) {
         recognize: recognize
     };
 };
-
 
 module.exports = google;
