@@ -18,30 +18,53 @@ Install
 > $ npm install
 
 
-## Step 2. Tune app via *config.js* ##
+## Step 2. Tune *config.js*: Select ASR service provider##
 
-1. set yandex developer key (https://developer.tech.yandex.ru/)
+1. set type: yandex or google, 
 
-2. set finder for lookup your peers [db, plain file]
+2. set developer key (see Links)
 
 
-## Step 3. Tune asterisk ##
+## Step 3. Choose lookup storage for search data
 
-add to *extensions.conf* like this
+1. set finder type: file, mongo or mysql
+
+2. set connection options for chosen type
+
+
+## Step 4. Tune asterisk ##
+
+1. add to *extensions.conf* number for magic!
 
 ``````
 [default]
 exten = > 1000,1,AGI(agi://localhost:3000)
 ``````
-ASTERISK CLI> dialplan reload
+2. reload dialplan 
+
+> ASTERISK CLI> dialplan reload
 
 
-## Step 4. Run app ##
+## Step 5. Run app ##
 
 from dir of 'voicer'
 
 > node app.js
 
 
+Congratulations! Now call to 1000 and enjoy! 
 
-And now call to 1000 and enjoy!
+
+Also you can tune additional options in *config.js*. 
+
+Try find optimal value for duration of record.
+
+
+Errors?! Bugs?! Oh, contact with me. I want to eat them.
+
+
+## Links ##
+
+Yandex API key: https://developer.tech.yandex.ru/
+
+Google API key: https://console.developers.google.com/
