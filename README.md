@@ -9,7 +9,7 @@ Call to special extension, say "Vasya" and Asterisk connect you with Vasya! Exce
 Install
 =======
 
-## Step 1. Copy app to your server ##
+## Step 1 Copy app to your server ##
 
 > $ git clone https://github.com/antirek/voicer.git
 
@@ -18,18 +18,20 @@ Install
 > $ npm install
 
 
-## Step 2. Tune *config.js*: Select ASR service provider##
+## Step 2 *config.js*: Select ASR service ##
 
 1. set type: yandex or google, 
 
 2. set developer key (see Links)
 
 
-## Step 3. Choose lookup storage for search data
+## Step 3 *config.js*: Choose lookup type
 
 1. set finder type: file, mongo or mysql
 
 2. set connection options for chosen type
+
+3. Fill data
 
 
 ## Step 4. Tune asterisk ##
@@ -78,10 +80,14 @@ Google API key: https://console.developers.google.com/
 
 ## Mongo ##
 
-1. import your data into mongodb
+1. create collection in mongodb
+
+For example:
 
 > mongoimport --db __yourdb__ --collection __yourcollection__ --type json --file peernames.json --jsonArray
+
 > // peernames.json sample in /data 
+
 
 2. set *config.js* work with mongodb
 
@@ -101,15 +107,17 @@ lookup: {
 
 1. create db and table
 
->> CREATE DATABASE `voicer` CHARACTER SET utf8 COLLATE utf8_general_ci;
->> CREATE TABLE `peernames` (
+````
+CREATE DATABASE `voicer` CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE `peernames` (
 	  `id` int(11) NOT NULL AUTO_INCREMENT,
 	  `name` varchar(255) NOT NULL,
 	  `channel` varchar(255) NOT NULL,
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+````
+and fill table data
 
-Fill data
 
 2. set *config.js* work with mysql
 
