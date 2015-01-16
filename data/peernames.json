@@ -1,6 +1,8 @@
+[{
+    "name": "Дмитриев", 
+    "channel": "SIP/1234"
+},
 {
-    "иван": "SIP/111@context",
-    "вася": "Local/2678@outbound",
-    "катя": "SIP/peername1",
-    "петя": "IAX/asd"
-}
+    "name": "Дмитриев Мобильный",
+    "channel": "Local/89135292926@outbound"
+}]
