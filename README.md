@@ -55,12 +55,16 @@ from dir of 'voicer'
 Congratulations! Now call to 1000 and enjoy! 
 
 
+## Some more ##
+
 Also you can tune additional options in *config.js*. 
 
 Try find optimal value for duration of record.
 
 
-Errors?! Bugs?! Oh, contact with me. I want to eat them.
+## Errors?! ##
+
+Bugs?! Oh, contact with me. I want to eat them.
 
 
 ## Links ##
@@ -68,3 +72,29 @@ Errors?! Bugs?! Oh, contact with me. I want to eat them.
 Yandex API key: https://developer.tech.yandex.ru/
 
 Google API key: https://console.developers.google.com/
+
+
+
+
+## Mongo ##
+
+1. import your data into mongodb
+
+> mongoimport --db __yourdb__ --collection __yourcollection__ --type json --file peernames.json --jsonArray
+> // peernames.json sample in /data 
+
+2. set *config.js* work with mongodb
+
+`````
+lookup: {
+        type: 'mongodb',
+        options: {
+            url: 'mongodb://localhost/__yourdb__',
+            collection: '__yourcollection__'
+        }
+    }
+`````
+
+
+## MySQL ##
+
