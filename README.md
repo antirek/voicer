@@ -87,14 +87,42 @@ Google API key: https://console.developers.google.com/
 
 `````
 lookup: {
-        type: 'mongodb',
-        options: {
-            url: 'mongodb://localhost/__yourdb__',
-            collection: '__yourcollection__'
-        }
+    type: 'mongodb',
+    options: {
+        url: 'mongodb://localhost/yourdb',
+        collection: 'yourcollection'
     }
+}
 `````
+
 
 
 ## MySQL ##
 
+1. create db and table
+
+>> CREATE DATABASE `voicer` CHARACTER SET utf8 COLLATE utf8_general_ci;
+>> CREATE TABLE `peernames` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `name` varchar(255) NOT NULL,
+	  `channel` varchar(255) NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+Fill data
+
+2. set *config.js* work with mysql
+
+````
+lookup: {
+    type: 'mysql',
+    options: {
+        host: 'locahost',
+        port: 3306,
+        username: 'root',
+        password: '1234',
+        database: 'voicer',
+        table: 'peernames'
+    }
+}
+````
