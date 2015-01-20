@@ -1,5 +1,5 @@
 module.exports = {
-    port: 3007,
+    port: 3000,
     debug: true,
     record: {    	
     	directory: '/tmp',
@@ -15,14 +15,9 @@ module.exports = {
     	}
     },
     lookup: {
-        type: 'mysql',  // ['file', 'mongodb', 'mysql']
+        type: 'file',  // ['file', 'mongodb', 'mysql']
         options: {
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: '1234',
-            database: 'voicer',
-            table: 'peernames'
+            dataFile: 'data/peernames.json'
         }
     }
 };
