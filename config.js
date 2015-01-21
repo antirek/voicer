@@ -7,7 +7,7 @@ module.exports = {
     	duration: 2,
     },
     recognize: {
-    	directory: '/tmp2',
+    	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
     	options: {
     		//developer_key: ''
