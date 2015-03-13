@@ -11,12 +11,15 @@
     "jugglingdb-mongodb": "0.0.4-4",
     "jugglingdb-mysql": "0.0.10",
     "node-uuid": "^1.4.2",
+    "q": "^1.2.0",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine": "^2.2.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
