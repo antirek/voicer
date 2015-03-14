@@ -5,16 +5,14 @@ var config = require('./config'),
 
 var debug = config['debug'];
 
-var SourceFactory = require('./lib/sourceFactory'),
-    EngineFactory = require('./lib/engineFactory');
+var SourceFactory = require('./lib/source/sourceFactory'),
+    RecognizerFactory = require('./lib/recognize/recognizerFactory');
 
-var finder = (new SourceFactory(config['lookup'])).make();
-finder.lookup('лопата').then(console.log);
+var source = (new SourceFactory(config['lookup'])).make();
+var recognizer = (new RecognizerFactory(config['recognize'])).make();
 
-var recognizer = (new EngineFactory(config['recognize'])).make();
-
-var handler = new Handler(finder, recognizer, config);
+var handler = new Handler(source, recognizer, config);
 
 agiServer
-.createServer(handler.handle)
-.listen(config.port);
+    .createServer(handler.handle)
+    .listen(config['port']);

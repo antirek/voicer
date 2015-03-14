@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
-  "dependencies": {
-    "async": "^0.9.0",
+  "dependencies": {    
     "ding-dong": "0.0.5",
     "google-speech": "0.0.2",
     "jugglingdb": "^0.3.0",
