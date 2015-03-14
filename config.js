@@ -7,22 +7,16 @@ module.exports = {
     	duration: 2,
     },
     recognize: {
-    	directory: '/tmp2',
+    	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
-    	options: {
-    		//developer_key: ''
-    		developer_key: ''
+    	options: {    		
+    		developer_key: 'AIzaSyC3GKVw_sK0Rgaq9qxQgLwlGIiUMvDykH8'
     	}
     },
     lookup: {
-        type: 'mysql',  // ['file', 'mongodb', 'mysql']
+        type: 'file',  // ['file', 'mongodb', 'mysql']
         options: {
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: '1234',
-            database: 'voicer',
-            table: 'peernames'
+            dataFile: 'data/peernames.json'
         }
     }
 };
