@@ -19,6 +19,8 @@ var Server = function (config) {
         if (config['logger']) {
             var logger = new Logger(config['logger']);
             handler.setLogger(logger);
+
+            recognizer.setLogger(logger);
         }
 
         dingDong
