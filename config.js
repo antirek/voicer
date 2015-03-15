@@ -18,5 +18,17 @@ module.exports = {
         options: {
             dataFile: 'data/peernames.json'
         }
+    },
+    logger: {
+        console: {
+            colorize: true            
+        },
+        syslog: {
+            host: 'localhost'            
+        },
+        file: {
+            filename: '/var/log/voicer.log',
+            json: false
+        }
     }
 };
