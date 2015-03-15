@@ -11,18 +11,23 @@ var Server = function (config) {
 
     this.start = function () {
 
-        var logger = new Logger(config['logger']);
-
         var source = (new SourceFactory(config['lookup'])).make();
         var recognizer = (new RecognizerFactory(config['recognize'])).make();
 
-        var handler = new Handler(source, recognizer, logger, config);
+        var handler = new Handler(source, recognizer, config);
+
+        if (config['logger']) {
+            var logger = new Logger(config['logger']);
+            handler.setLogger(logger);
+        }
 
         dingDong
             .createServer(handler.handle)
             .listen(config['port']);
 
-        logger.info('server started');     
+        if (logger) {
+            logger.info('server started');
+        }
     };
 };
 

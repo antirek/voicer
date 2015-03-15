@@ -1,7 +1,7 @@
 module.exports = {
     port: 3007,
     debug: true,
-    record: {    	
+    record: {
     	directory: '/tmp',
     	type: 'wav',
     	duration: 2,
@@ -9,7 +9,7 @@ module.exports = {
     recognize: {
     	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
-    	options: {    		
+    	options: {
     		developer_key: 'AIzaSyC3GKVw_sK0Rgaq9qxQgLwlGIiUMvDykH8'
     	}
     },
@@ -21,10 +21,10 @@ module.exports = {
     },
     logger: {
         console: {
-            colorize: true            
+            colorize: true
         },
         syslog: {
-            host: 'localhost'            
+            host: 'localhost'
         },
         file: {
             filename: '/var/log/voicer.log',
