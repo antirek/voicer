@@ -22,7 +22,8 @@ describe('Handler', function () {
             var defer = Q.defer();
             defer.resolve(expectedText);
             return defer.promise;
-        }
+        },
+        setLogFunction: function () {}
     };
 
     var logger = {
@@ -61,8 +62,7 @@ describe('Handler', function () {
                 callback();
             }
         };     
-        handler = new Handler(source, recognizer, config);
-        handler.setLogger(logger);
+        handler = new Handler(source, recognizer, config);        
     });
 
     it('should use context "variables" event', function (done) {
