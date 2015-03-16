@@ -1,5 +1,5 @@
 module.exports = {
-    port: 3007,
+    port: 3000,
     debug: true,
     record: {
     	directory: '/tmp',
