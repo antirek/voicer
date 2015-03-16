@@ -1,7 +1,7 @@
 module.exports = {
     port: 3000,
     debug: true,
-    record: {    	
+    record: {
     	directory: '/tmp',
     	type: 'wav',
     	duration: 2,
@@ -10,14 +10,25 @@ module.exports = {
     	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
     	options: {
-    		//developer_key: ''
-    		developer_key: ''
+    		developer_key: 'AIzaSyDlK5-IadfJtgrfJsi5mdOF-9kzTS_tqh0'
     	}
     },
     lookup: {
         type: 'file',  // ['file', 'mongodb', 'mysql']
         options: {
             dataFile: 'data/peernames.json'
+        }
+    },
+    logger: {
+        console: {
+            colorize: true
+        },
+        syslog: {
+            host: 'localhost'
+        },
+        file: {
+            filename: '/var/log/voicer.log',
+            json: false
         }
     }
 };
