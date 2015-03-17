@@ -10,7 +10,7 @@ module.exports = {
     	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
     	options: {
-    		developer_key: 'AIzaSyDlK5-IadfJtgrfJsi5mdOF-9kzTS_tqh0'
+    		developer_key: 'AIzaSyCrMt7qkihMI9DoG_skt6J4joI4sJ5_0LE'
     	}
     },
     lookup: {
