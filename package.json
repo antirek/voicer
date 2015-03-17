@@ -17,6 +17,7 @@
     "yandex-speech": "^0.0.11"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
     "grunt-jasmine-node-istanbul": "0.0.5",
     "jasmine": "^2.2.1"
   },
