@@ -5,6 +5,8 @@ AGI yandex voice recognizer for Asterisk
 
 Call to special extension, say "Vasya" and Asterisk connect you with Vasya! Excellent!
 
+[![Build Status](https://travis-ci.org/antirek/voicer.svg?branch=master)](https://travis-ci.org/antirek/voicer)
+
 
 Concept
 =======
