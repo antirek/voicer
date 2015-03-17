@@ -6,55 +6,103 @@ AGI yandex voice recognizer for Asterisk
 Call to special extension, say "Vasya" and Asterisk connect you with Vasya! Excellent!
 
 
-Install
+Concept
 =======
 
-## Step 1 Copy app to your server ##
+Voicer work as AGI-server. Voicer accept request from asterisk via AGI app.
+It run handler for each request. Handler command asterisk record file.
+After this send file to recognition service, receive text, search by text in 
+source of data for finding concordance, if source have this text it return 
+channel for call, voicer make call to finded channel.
 
-> $ git clone https://github.com/antirek/voicer.git
+Fast start
+==========
 
-> $ cd voicer
-
-> $ npm install
-
-
-## Step 2 *config.js*: Select ASR service ##
-
-1. set type: yandex or google, 
-
-2. set developer key (see Links)
+Use voicer-app http://github.com/antirek/voicer-app
 
 
-## Step 3 *config.js*: Choose lookup type
+Use 
+===
 
-1. set finder type: file, mongo or mysql
-
-2. set connection options for chosen type
-
-3. Fill data
+in your work dir
 
 
-## Step 4. Tune asterisk ##
+## Install ##
 
-1. add to *extensions.conf* number for magic!
+> $ npm install voicer [--save]
+
+
+## Write app.js ##
+
+Add to your **app.js** code
+
+`````
+var config = require('./config');
+var Voicer = require('voicer');
+
+var voicer = new Voicer(config);
+voicer.start();
+
+`````
+
+## Start *voicer* server ##
+
+> $ node app.js
+
+
+Configuration
+=============
+
+## Config.js ##
+
 
 ``````
+{
+    port: 3000,
+    debug: true,
+    record: {
+        directory: '/tmp',
+        type: 'wav',
+        duration: 2,
+    },
+    recognize: {
+        directory: '/tmp',
+        type: 'google',  // ['yandex', 'google']
+        options: {
+            developer_key: 'dev_key'
+        }
+    },
+    lookup: {
+        type: 'file',  // ['file', 'mongodb', 'mysql']
+        options: {
+            dataFile: 'data/peernames.json'
+        }
+    },
+    logger: {
+        console: {
+            colorize: true
+        },
+        syslog: {
+            host: 'localhost'
+        },
+        file: {
+            filename: '/var/log/voicer.log',
+            json: false
+        }
+    }
+};
+
+``````
+
+## Asterisk ##
+
+Write dialplan for call to AGI-server voicer like
+
+`````
 [default]
 exten = > 1000,1,AGI(agi://localhost:3000)
-``````
-2. reload dialplan 
+`````
 
-> ASTERISK CLI> dialplan reload
-
-
-## Step 5. Run app ##
-
-from dir of 'voicer'
-
-> node app.js
-
-
-Congratulations! Now call to 1000 and enjoy! 
 
 
 ## Some more ##
@@ -75,7 +123,7 @@ Yandex API key: https://developer.tech.yandex.ru/
 
 Google API key: https://console.developers.google.com/
 
-
+Voice speed dial on Asterisk http://habrahabr.ru/post/248263/  (russian)
 
 
 ## Mongo ##
@@ -86,7 +134,7 @@ For example:
 
 > mongoimport --db __yourdb__ --collection __yourcollection__ --type json --file peernames.json --jsonArray
 
-> // peernames.json sample in /data 
+> // peernames.json sample in ./example/data 
 
 
 2. set *config.js* work with mongodb
