@@ -8,9 +8,9 @@ module.exports = {
     },
     recognize: {
     	directory: '/tmp',
-    	type: 'google',  // ['yandex', 'google']
+    	type: 'yandex',  // ['yandex', 'google']
     	options: {
-    		developer_key: 'AIzaSyCrMt7qkihMI9DoG_skt6J4joI4sJ5_0LE'
+    		developer_key: '3b7b9fba-cbcd-47d1-854a-b359ca0e5da5qqq'
     	}
     },
     lookup: {
