@@ -28,7 +28,7 @@ describe('ASRRequest', function () {
     var defaults = {};
     var key = 'ABCD';
     
-    it('return result if finder find result', function (done) {
+    it('check asr load file and return result', function (done) {
 
         var asr = new ASRRequest(services['good'], key, defaults);
         
@@ -41,7 +41,19 @@ describe('ASRRequest', function () {
        
     });
 
-    it('return result if finder find result', function (done) {
+    it('check asr load no file and return error', function (done) {
+
+        var asr = new ASRRequest(services['good'], key, defaults);
+        
+        asr.load()
+        .fail(function (error) {
+            expect(error).toEqual(new Error('No file'));
+            done();
+        });
+       
+    });
+
+    it('check asr load file but service is forbidden', function (done) {
 
         var asr = new ASRRequest(services['forbidden'], key, defaults);
         
@@ -53,7 +65,7 @@ describe('ASRRequest', function () {
 
     });
 
-    it('return result if finder find result', function (done) {
+    it('check asr load file but http return error', function (done) {
 
         var asr = new ASRRequest(services['fail'], key, defaults);
         
