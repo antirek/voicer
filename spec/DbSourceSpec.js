@@ -33,12 +33,12 @@ describe('DbSource', function () {
             });
     });
 
-    it('return error if finder return empty', function (done) {
+    it('return null if finder return empty', function (done) {
         var dbSource = new DbSource(new Model.empty());
 
         dbSource.lookup('Дмитриев')
-            .fail(function (error) {
-                expect(error instanceof Error).toBe(true);
+            .then(function (result) {
+                expect(result).toBe(null);
                 done();
             });
     });
