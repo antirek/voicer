@@ -44,7 +44,7 @@ describe('FileSource', function () {
 
         fileSource.lookup('Дмитриев')
             .fail(function (err) {
-                expect(err).toEqual(new TypeError("Cannot call method 'filter' of undefined"));
+                expect(err instanceof TypeError).toBe(true);
                 done();
             });
     });
