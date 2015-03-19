@@ -1,9 +1,12 @@
 var FileSource = require('../lib/source/fileSource');
 var Q = require('q');
 
-describe('FileSource', function () {    
+describe('FileSource', function () {
+    var expectedObject = {"name":"Дмитриев","channel":"SIP/1234"};
+
     var content = {
         good: '[{"name":"Дмитриев","channel":"SIP/1234"}]',
+        good_without_channel: '[{"name":"Дмитриев","channelMove":"SIP/1234"}]',
         empty: '[]',
         bad: '['
     };
@@ -22,23 +25,34 @@ describe('FileSource', function () {
 
         fileSource.lookup('Дмитриев')
             .then(function (result) {
-                expect(result).toEqual("SIP/1234");
+                expect(result).toEqual(expectedObject);
                 done();
             });
     });
 
-    it('return result if finder not find result', function (done) {
+    it('return error if finder not find result', function (done) {
 
         var fileSource = new FileSource(new FileReader(content.empty));
 
         fileSource.lookup('Дмитриев')
-            .then(function (result) {
-                expect(result).toBe(null);
+            .fail(function (error) {
+                expect(error instanceof Error).toBe(true);
                 done();
             });
     });
 
-    it('return result if finder get broken json', function (done) {
+    it('return error if finder find result but not have channel', function (done) {
+
+        var fileSource = new FileSource(new FileReader(content.good_without_channel));
+
+        fileSource.lookup('Дмитриев')
+            .fail(function (error) {
+                expect(error instanceof Error).toBe(true);
+                done();
+            });
+    });
+
+    it('return error if finder get broken json', function (done) {
 
         var fileSource = new FileSource(new FileReader(content.bad));
 
