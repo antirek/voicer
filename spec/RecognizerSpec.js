@@ -9,17 +9,13 @@ describe('Recognizer', function () {
 
     var asrRequest = {
         load: function (file) {
-            var defer = Q.defer();
-            defer.resolve(textInFile);
-            return defer.promise;
+            return Q.resolve(textInFile);
         }
     };
 
     var parser = {
         parse: function (text) {
-            var defer = Q.defer();
-            defer.resolve(parsedValue);
-            return defer.promise;
+            return Q.resolve(parsedValue); 
         }
     };
 

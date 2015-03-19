@@ -1,6 +1,6 @@
 module.exports = {
     port: 3000,
-    debug: true,
+    totalAttempts: 2,
     record: {
     	directory: '/tmp',
     	type: 'wav',
@@ -8,9 +8,9 @@ module.exports = {
     },
     recognize: {
     	directory: '/tmp',
-    	type: 'yandex',  // ['yandex', 'google']
+    	type: 'google',  // ['yandex', 'google']
     	options: {
-    		developer_key: '3b7b9fba-cbcd-47d1-854a-b359ca0e5da5qqq'
+    		developer_key: 'AIzaSyBADnl17W926EkbgSJ1yJ0RtpwpJbELxxc'
     	}
     },
     lookup: {
