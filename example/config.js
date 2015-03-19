@@ -1,6 +1,20 @@
 module.exports = {
-    port: 3000,
-    totalAttempts: 2,
+    server: {
+        port: 3000
+    },
+    processing: {
+        totalAttempts: 2,
+        playGreeting: true,
+        playBeepBeforeRecording: true
+    },
+    asterisk: {
+        sounds: {
+            onError: 'invalid',
+            onErrorRepeat: 'invalid',
+            greeting: 'beep',
+            beep: 'beep'
+        }
+    },
     record: {
     	directory: '/tmp',
     	type: 'wav',
