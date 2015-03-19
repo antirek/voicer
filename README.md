@@ -1,7 +1,7 @@
 voicer
 ======
 
-AGI yandex voice recognizer for Asterisk
+AGI voice recognizer for Asterisk [use Yandex or Google ASR]
 
 Call to special extension, say "Vasya" and Asterisk connect you with Vasya! Excellent!
 
@@ -61,7 +61,6 @@ Configuration
 ``````
 {
     port: 3000,
-    debug: true,
     record: {
         directory: '/tmp',
         type: 'wav',
@@ -184,3 +183,19 @@ lookup: {
     }
 }
 ````
+
+
+
+
+Development
+===========
+
+
+## Test ##
+
+> npm test
+
+
+## Code coverage ##
+
+> grunt
