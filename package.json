@@ -1,6 +1,6 @@
 {
   "name": "voicer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {

@@ -52,7 +52,7 @@ describe('Handler', function () {
             streamFile: function (filename, digits, callback) {
                 callback();
             },
-            recordFile: function (filename, format, escape_digits, timeout, callback) {
+            recordFile: function (filename, format, escape_digits, timeout, offset, beep, silence, callback) {
                 callback();
             },
             setVariable: function (variableName, value, callback) {
@@ -88,7 +88,7 @@ describe('Handler', function () {
     });
 
     it('should use context recordFile method', function (done) {
-        context.recordFile = function (file, format, escape_digits, timeout) {
+        context.recordFile = function (file, format, escape_digits, timeout, offset, beep, silence) {
             done();
         };
         handler.handle(context);
