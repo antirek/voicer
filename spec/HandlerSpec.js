@@ -33,6 +33,19 @@ describe('Handler', function () {
     };
 
     var config = {
+        processing: {
+            totalAttempts: 2,
+            playGreeting: true,
+            playBeepBeforeRecording: true
+        },
+        asterisk: {
+            sounds: {
+                onError: 'invalid',
+                onErrorRepeat: 'invalid',
+                greeting: 'tt-monkeysintro',
+                beep: 'beep'
+            }
+        },
         record: {
             directory: '/tmp'
         },
@@ -65,15 +78,16 @@ describe('Handler', function () {
         handler = new Handler(source, recognizer, config);        
     });
 
-    it('should use context "variables" event', function (done) {
+    it('should use context on event', function (done) {
         context.on = function (eventName) {
-            expect(eventName).toBe('variables');
+            var arr = ['variables', 'error', 'close', 'hangup'];
+            expect(arr).toContain(eventName);
             done();
         };
         handler.handle(context);
     });
 
-    it('should use context answer method', function (done) {
+    it('should use context answer method', function (done) {        
         context.answer = function () {
             done();
         };

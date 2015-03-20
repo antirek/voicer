@@ -5,14 +5,13 @@ module.exports = {
     processing: {
         totalAttempts: 2,
         playGreeting: true,
-        playBeepBeforeRecording: true
+        playBeepBeforeRecording: true   //use system beep
     },
     asterisk: {
         sounds: {
-            onError: 'invalid',
-            onErrorRepeat: 'invalid',
-            greeting: 'tt-monkeysintro',
-            beep: 'beep'
+            onErrorBeforeFinish: 'invalid',
+            onErrorBeforeRepeat: 'invalid',
+            greeting: 'tt-monkeysintro'
         }
     },
     record: {
