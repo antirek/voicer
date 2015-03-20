@@ -23,7 +23,7 @@ var Server = function (config) {
 
         dingDong
             .createServer(handler.handle)
-            .listen(config['port']);
+            .listen(config.server['port']);
 
         if (logger) {
             logger.info('server started');

@@ -11,7 +11,7 @@ module.exports = {
         sounds: {
             onError: 'invalid',
             onErrorRepeat: 'invalid',
-            greeting: 'beep',
+            greeting: 'tt-monkeysintro',
             beep: 'beep'
         }
     },
@@ -24,7 +24,7 @@ module.exports = {
     	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
     	options: {
-    		developer_key: 'AIzaSyBADnl17W926EkbgSJ1yJ0RtpwpJbELxxc'
+    		developer_key: 'AIzaSyCasG272lrvx2e7FgbjTGFp9X7kHQFk71Y'
     	}
     },
     lookup: {
