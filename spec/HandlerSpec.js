@@ -27,9 +27,7 @@ describe('Handler', function () {
     };
 
     var logger = {
-        info: function (module, callId, message, object){
-            //console.log(module, callId, message, object);
-        }
+        info: function (module, callId, message, object) {}
     };
 
     var config = {
@@ -108,8 +106,8 @@ describe('Handler', function () {
         handler.handle(context);
     });
 
-    it('should use context dial method', function (done) {
-        context.dial = function (channel) {
+    it('should use context setVariable method', function (done) {
+        context.setVariable = function (varname, value) {
             done();
         };
         handler.handle(context);

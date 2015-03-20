@@ -5,13 +5,17 @@ module.exports = {
     processing: {
         totalAttempts: 2,
         playGreeting: true,
-        playBeepBeforeRecording: true   //use system beep
+        playBeepBeforeRecording: false   //use system beep
     },
     asterisk: {
         sounds: {
             onErrorBeforeFinish: 'invalid',
             onErrorBeforeRepeat: 'invalid',
             greeting: 'tt-monkeysintro'
+        },
+        recognitionDialplanVars: {
+            result: 'RECOGNITION_RESULT',
+            channel: 'RECOGNITION_CHANNEL'
         }
     },
     record: {
