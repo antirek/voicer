@@ -85,34 +85,6 @@ describe('Handler', function () {
         handler.handle(context);
     });
 
-    it('should use context answer method', function (done) {        
-        context.answer = function () {
-            done();
-        };
-        handler.handle(context);
-    });
-
-    it('should use context streamFile method', function (done) {
-        context.streamFile = function (file, acceptDigits) {            
-            done();
-        };
-        handler.handle(context);
-    });
-
-    it('should use context recordFile method', function (done) {
-        context.recordFile = function (file, format, escape_digits, timeout, offset, beep, silence) {
-            done();
-        };
-        handler.handle(context);
-    });
-
-    it('should use context setVariable method', function (done) {
-        context.setVariable = function (varname, value) {
-            done();
-        };
-        handler.handle(context);
-    });
-
     it('should use context end method', function (done) {
         context.end = function () {
             done();

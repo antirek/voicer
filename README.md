@@ -60,7 +60,25 @@ Configuration
 
 ``````
 {
-    port: 3000,
+    server: {
+        port: 3000
+    },
+    processing: {
+        totalAttempts: 2,
+        playGreeting: true,
+        playBeepBeforeRecording: false
+    },
+    asterisk: {
+        sounds: {
+            onErrorBeforeFinish: 'invalid',
+            onErrorBeforeRepeat: 'invalid',
+            greeting: 'tt-monkeysintro'
+        },
+        recognitionDialplanVars: {
+            result: 'RECOGNITION_RESULT',
+            channel: 'RECOGNITION_CHANNEL'
+        }
+    },
     record: {
         directory: '/tmp',
         type: 'wav',
@@ -91,7 +109,7 @@ Configuration
             json: false
         }
     }
-};
+}
 
 ``````
 
@@ -101,7 +119,10 @@ Write dialplan for call to AGI-server voicer like
 
 `````
 [default]
-exten = > 1000,1,AGI(agi://localhost:3000)
+exten=1000,1,AGI(agi://localhost:3000)
+exten=1000,n,GotoIf($[${RECOGNITION_RESULT}=SUCCESS]?:default,1000,4)
+exten=1000,n,Dial(${RECOGNITION_CHANNEL})
+
 `````
 
 
