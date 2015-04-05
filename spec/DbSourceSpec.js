@@ -37,8 +37,8 @@ describe('DbSource', function () {
         var dbSource = new DbSource(new Model.empty());
 
         dbSource.lookup('Дмитриев')
-            .then(function (result) {
-                expect(result).toBe(null);
+            .fail(function (error) {
+                expect(error instanceof Error).toBe(true);
                 done();
             });
     });

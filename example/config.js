@@ -31,9 +31,13 @@ module.exports = {
     	}
     },
     lookup: {
-        type: 'file',  // ['file', 'mongodb', 'mysql']
-        options: {
+        type: 'mongodb',  // ['file', 'mongodb', 'mysql']
+        /* options: {
             dataFile: 'data/peernames.json'
+        } */
+        options: {
+            url: 'mongodb://localhost/test',
+            collection: 'test'
         }
     },
     logger: {

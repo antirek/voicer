@@ -2,10 +2,10 @@ var FileSource = require('../lib/source/fileSource');
 var Q = require('q');
 
 describe('FileSource', function () {
-    var expectedObject = {"name":"Дмитриев","channel":"SIP/1234"};
+    var expectedObject = {"name":"Дмитриев","target":"SIP/1234","variants":["дмитриев","дмитриев сергей"]};
 
     var content = {
-        good: '[{"name":"Дмитриев","channel":"SIP/1234"}]',
+        good: '[{"name":"Дмитриев","target":"SIP/1234","variants":["дмитриев","дмитриев сергей"]}]',
         good_without_channel: '[{"name":"Дмитриев","channelMove":"SIP/1234"}]',
         empty: '[]',
         bad: '['

@@ -1,8 +1,16 @@
-[{
-    "name": "лопата", 
-    "channel": "SIP/1234"
-},
-{
-    "name": "Дмитриев Мобильный",
-    "channel": "Local/89135292926@outbound"
-}]
+[
+  {
+    "name":"dsf",
+    "target":"dsf",
+    "variants":[
+      "dsf"
+    ]
+  },
+  {
+    "name":"dsf",
+    "target":"dsf",
+    "variants":[
+      "dsf"
+    ]
+  }
+]
