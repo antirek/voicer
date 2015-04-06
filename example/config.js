@@ -15,7 +15,7 @@ module.exports = {
         },
         recognitionDialplanVars: {
             result: 'RECOGNITION_RESULT',
-            channel: 'RECOGNITION_CHANNEL'
+            target: 'RECOGNITION_TARGET'
         }
     },
     record: {
@@ -27,18 +27,18 @@ module.exports = {
     	directory: '/tmp',
     	type: 'google',  // ['yandex', 'google']
     	options: {
-    		developer_key: 'AIzaSyCasG272lrvx2e7FgbjTGFp9X7kHQFk71Y'
+    		developer_key: 'AIzaSyAp3pT4JHBt9PI8-pJ6QNXXdyGRqD7O_3M'
     	}
     },
     lookup: {
-        type: 'mongodb',  // ['file', 'mongodb', 'mysql']
-        /* options: {
-            dataFile: 'data/peernames.json'
-        } */
+        type: 'file',  // ['file', 'mongodb', 'mysql']
         options: {
+            dataFile: 'data/peernames.json'
+        }
+        /*options: {
             url: 'mongodb://localhost/test',
             collection: 'test'
-        }
+        }*/
     },
     logger: {
         console: {
