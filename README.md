@@ -83,7 +83,7 @@ Configuration
         },
         recognitionDialplanVars: {
             result: 'RECOGNITION_RESULT',
-            channel: 'RECOGNITION_CHANNEL'
+            target: 'RECOGNITION_TARGET'
         }
     },
     record: {
@@ -128,7 +128,25 @@ Write dialplan for call to AGI-server voicer like
 [default]
 exten=1000,1,AGI(agi://localhost:3000)
 exten=1000,n,GotoIf($[${RECOGNITION_RESULT}=SUCCESS]?:default,1000,4)
-exten=1000,n,Dial(${RECOGNITION_CHANNEL})
+exten=1000,n,Dial(${RECOGNITION_TARGET})
+
+`````
+
+## Format peernames ##
+
+`````
+[
+    ....
+
+    {
+        "name": "Vasya",
+        "target": "SIP/Sf567890",
+        "variants": ["vasya", "vasya petrov"]
+    },
+    
+    ....
+
+]
 
 `````
 
