@@ -12,6 +12,7 @@
     "jugglingdb-mysql": "0.0.10",
     "node-uuid": "^1.4.2",
     "q": "^1.2.0",
+    "voicer-web": "0.0.3",
     "winston": "^0.9.0",
     "winston-syslog": "^1.0.0",
     "xml2js": "^0.4.4",

@@ -9,6 +9,8 @@ var ConfigSchema = require('./lib/configSchema');
 var SourceFactory = require('./lib/source/sourceFactory');
 var RecognizerFactory = require('./lib/recognize/recognizerFactory');
 
+var VoicerWeb = require('voicer-web');
+
 var Server = function (config) {
 
     var logger;
@@ -38,7 +40,10 @@ var Server = function (config) {
 
         dingDong
             .createServer(handler.handle)
-            .listen(config.server['port']);
+            .listen(config.agi['port']);
+
+        var voicerWeb = new VoicerWeb(source, config['web']);
+        voicerWeb.start();
 
         log('server started');
     };

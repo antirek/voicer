@@ -1,19 +1,33 @@
 [
   {
-    "name":"Дмитриев Сергей",
-    "target":"SIP/Sf745025",
-    "variants":[
+    "name": "Дмитриев Сергей",
+    "target": "SIP/Sf745025",
+    "variants": [
       "дмитриев",
       "сергей"
     ]
   },
   {
-    "name":"Студеная вода",
-    "target":"Local/2555575@AC000032",
-    "variants":[
+    "name": "Студеная вода",
+    "target": "Local/2555575@AC000032",
+    "variants": [
       "студеная вода",
       "заповедная вода",
       "вода"
+    ]
+  },
+  {
+    "name": "sadas",
+    "target": "safsafsaf",
+    "variants": [
+      "sadas"
+    ]
+  },
+  {
+    "name": "sadas",
+    "target": "asdsad",
+    "variants": [
+      "sadas"
     ]
   }
 ]

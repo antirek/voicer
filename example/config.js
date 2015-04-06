@@ -1,6 +1,9 @@
 module.exports = {
-    server: {
+    agi: {
         port: 3000
+    },
+    web: {
+        port: 3007
     },
     processing: {
         totalAttempts: 2,
