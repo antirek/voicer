@@ -67,8 +67,11 @@ Configuration
 
 ``````
 {
-    server: {
+    agi: {
         port: 3000
+    },
+    web: {
+        port: 3100
     },
     processing: {
         totalAttempts: 2,

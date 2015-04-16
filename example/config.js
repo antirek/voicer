@@ -3,7 +3,7 @@ module.exports = {
         port: 3000
     },
     web: {
-        port: 3007
+        port: 3100
     },
     processing: {
         totalAttempts: 2,
@@ -14,7 +14,7 @@ module.exports = {
         sounds: {
             onErrorBeforeFinish: 'invalid',
             onErrorBeforeRepeat: 'invalid',
-            greeting: 'tt-monkeysintro'
+            greeting: 'beep'
         },
         recognitionDialplanVars: {
             result: 'RECOGNITION_RESULT',
