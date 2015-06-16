@@ -1,5 +1,5 @@
 
-var dingDong = require('ding-dong');
+var AGIServer = require('ding-dong');
 var Joi = require('joi');
 
 var Handler = require('./lib/handler');
@@ -38,9 +38,8 @@ var Server = function (config) {
             handler.setLogger(logger);
         }
 
-        dingDong
-            .createServer(handler.handle)
-            .listen(config.agi['port']);
+        var agiServer = new AGIServer(handler.handle);
+        agiServer.start(config.agi['port']);
 
         var voicerWeb = new VoicerWeb(source, config['web']);
         voicerWeb.start();

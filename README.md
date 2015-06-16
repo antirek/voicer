@@ -16,7 +16,7 @@ Voicer work as AGI-server. Voicer accept request from asterisk via AGI app.
 It run handler for each request. Handler command asterisk record file.
 After this send file to recognition service, receive text, search by text in 
 source of data for finding concordance, if source have this text it return 
-channel for call, voicer set dialplan vars RECOGNITION_RESULT as SUCCESS и 
+channel for call, voicer set dialplan vars RECOGNITION_STATUS as SUCCESS и 
 RECOGNITION_TARGET for finded result.
 
 
@@ -110,10 +110,7 @@ Configuration
     logger: {
         console: {
             colorize: true
-        },
-        syslog: {
-            host: 'localhost'
-        },
+        },        
         file: {
             filename: '/var/log/voicer.log',
             json: false
@@ -130,7 +127,7 @@ Write dialplan for call to AGI-server voicer like
 `````
 [default]
 exten=1000,1,AGI(agi://localhost:3000)
-exten=1000,n,GotoIf($[${RECOGNITION_RESULT}=SUCCESS]?:default,1000,4)
+exten=1000,n,GotoIf($[${RECOGNITION_STATUS}=SUCCESS]?:default,1000,4)
 exten=1000,n,Dial(${RECOGNITION_TARGET})
 
 `````
@@ -232,8 +229,6 @@ lookup: {
     }
 }
 ````
-
-
 
 
 Development

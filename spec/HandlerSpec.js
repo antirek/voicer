@@ -1,10 +1,10 @@
 var Q = require('q');
 var Handler = require('../lib/handler');
-var ContextWrapper = require('../lib/contextWrapper');
+
 
 describe('Handler', function () {
     var handler;
-    var context = new ContextWrapper();
+    var context;
     
     var expectedChannel = 'SIP/1234';
     var expectedText = 'Дмитриев';
@@ -52,53 +52,40 @@ describe('Handler', function () {
         }
     };
 
-    beforeEach(function () {
-        context = {
-            on: function (eventName, callback) {
-                callback({agiParam: '1'});
-            },
-            answer: function (callback) {
-                callback();
-            },
-            streamFile: function (filename, digits, callback) {
-                callback();
-            },
-            recordFile: function (filename, format, escape_digits, timeout, offset, beep, silence, callback) {
-                callback();
-            },
-            setVariable: function (variableName, value, callback) {
-                callback();
-            },
-            end: function (callback) {
-                callback();
-            }
-        };     
-        handler = new Handler(source, recognizer, config);        
-    });
+    var Context = function() {
 
-    it('should use context on event', function (done) {
-        context.on = function (eventName) {
-            var arr = ['variables', 'error', 'close', 'hangup'];
-            expect(arr).toContain(eventName);
-            done();
+        var onEvent = function (event) {
+            expect(['variables', 'error', 'close', 'hangup']).toEqual(jasmine.arrayContaining([event]));
+            return Q.resolve();
         };
-        handler.handle(context);
-    });
 
-    it('should use context end method', function (done) {
-        context.end = function () {
-            done();
+        var answer = function () {            
+            return Q.resolve();
         };
-        handler.handle(context);
-    });
 
-    it('should use logger', function (done) {
-        logger = {
-            info: function (){
-                done();
-            }
+        var setVariable = function (variable, value) {
+            expect([24, 5]).toEqual(jasmine.arrayContaining([value]));
+            return Q.resolve();
         };
-        handler.setLogger(logger);
+
+        var streamFile = function (filename, digits) {            
+            return Q.resolve();
+        };
+
+        return {
+            answer: answer,
+            onEvent: onEvent,
+            setVariable: setVariable,
+            streamFile: streamFile
+        };
+    };
+    
+    it('standard flow', function (done) {
+        
+        context = new Context();
+        handler = new Handler(source, recognizer, config);
+
         handler.handle(context);
+        done();
     });
 });
