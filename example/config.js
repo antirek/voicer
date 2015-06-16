@@ -34,14 +34,10 @@ module.exports = {
     	}
     },
     lookup: {
-        type: 'file',  // ['file', 'mongodb', 'mysql']
+        type: 'file',
         options: {
             dataFile: 'data/peernames.json'
         }
-        /*options: {
-            url: 'mongodb://localhost/test',
-            collection: 'test'
-        }*/
     },
     logger: {
         console: {

@@ -102,7 +102,7 @@ Configuration
         }
     },
     lookup: {
-        type: 'file',  // ['file', 'mongodb', 'mysql']
+        type: 'file',
         options: {
             dataFile: 'data/peernames.json'
         }
