@@ -1,6 +1,6 @@
 {
   "name": "voicer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
@@ -9,7 +9,7 @@
     "joi": "^6.0.8",
     "node-uuid": "^1.4.2",
     "q": "^1.2.0",
-    "voicer-web": "0.0.3",
+    "voicer-web": "0.0.4",
     "winston": "^0.9.0",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
