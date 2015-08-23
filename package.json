@@ -6,7 +6,7 @@
   "dependencies": {
     "ding-dong": "0.1.1",
     "google-speech": "0.0.2",
-    "joi": "^6.0.8",
+    "joi": "^6.6.1",
     "node-uuid": "^1.4.2",
     "q": "^1.2.0",
     "voicer-web": "0.0.4",
