@@ -8,6 +8,7 @@
     "google-speech": "0.0.2",
     "joi": "^6.6.1",
     "node-uuid": "^1.4.2",
+    "parse-json": "^2.0.0",
     "q": "^1.2.0",
     "voicer-web": "0.0.4",
     "winston": "^0.9.0",
