@@ -3,7 +3,11 @@ module.exports = {
         port: 3000
     },
     web: {
-        port: 3100
+        port: 3100,
+        auth: true,
+        username: 'vasya',
+        password: 'password',
+        realm: 'My company'
     },
     processing: {
         totalAttempts: 2,
@@ -28,10 +32,16 @@ module.exports = {
     },
     recognize: {
     	directory: '/tmp',
-    	type: 'google',  // ['yandex', 'google']
+        /*    	
+        type: 'google',  // ['yandex', 'google', 'witai']
     	options: {
     		developer_key: 'AIzaSyBmdtN0y0DwFnIIZgTJyBXLP_M8nsRBcDw'
     	}
+        */
+        type: 'witai',
+        options: {
+            developer_key: '6SQV3DEGQWIXW3R2EDFUMPQCVGOEIBCR'
+        }
     },
     lookup: {
         type: 'file',

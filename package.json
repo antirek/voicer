@@ -10,8 +10,9 @@
     "node-uuid": "^1.4.2",
     "parse-json": "^2.0.0",
     "q": "^1.2.0",
-    "voicer-web": "0.0.4",
+    "voicer-web": "0.0.5",
     "winston": "^0.9.0",
+    "witai-speech": "0.0.1",
     "xml2js": "^0.4.4",
     "yandex-speech": "^0.0.11"
   },
