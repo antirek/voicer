@@ -19,7 +19,7 @@ describe('ASRRequest', function () {
         },
         fail: {
             ASR: function (file, cb) {
-                cb(expectedError, '', '');
+                cb(expectedError);
             }
         }
     };

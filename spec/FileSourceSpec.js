@@ -63,7 +63,8 @@ describe('FileSource', function () {
         var fileSource = new FileSource(new FileReader(content.bad), validator);
 
         fileSource.lookup('Дмитриев')
-            .fail(function (err) {                         
+            .fail(function (err) {
+                console.log(err);                       
                 expect(err instanceof SyntaxError).toBe(true);
                 done();
             });
