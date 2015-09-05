@@ -32,13 +32,7 @@ module.exports = {
     },
     recognize: {
     	directory: '/tmp',
-        /*    	
-        type: 'google',  // ['yandex', 'google', 'witai']
-    	options: {
-    		developer_key: 'AIzaSyBmdtN0y0DwFnIIZgTJyBXLP_M8nsRBcDw'
-    	}
-        */
-        type: 'witai',
+        type: 'witai',    // ['yandex', 'google', 'witai']
         options: {
             developer_key: '6SQV3DEGQWIXW3R2EDFUMPQCVGOEIBCR'
         }
