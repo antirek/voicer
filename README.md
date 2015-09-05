@@ -14,10 +14,14 @@ Workflow
 
 Voicer work as AGI-server. Voicer accept request from asterisk via AGI app.
 It run handler for each request. Handler command asterisk record file.
+
 After this send file to recognition service, receive text, search by text in 
 source of data for finding concordance, if source have this text it return 
-channel for call, voicer set dialplan vars RECOGNITION_RESULT as SUCCESS и 
-RECOGNITION_TARGET for finded result.
+channel for call, voicer set dialplan vars RECOGNITION_RESULT as SUCCESS and 
+RECOGNITION_TARGET for finded result. 
+
+After this voicer return control to dialplan. Build rules of dialplan using 
+RECOGNITION_RESULT and RECOGNITION_TARGET.
 
 
 
