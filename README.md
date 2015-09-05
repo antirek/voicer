@@ -71,18 +71,22 @@ Configuration
         port: 3000
     },
     web: {
-        port: 3100
+        port: 3100,
+        auth: true,    // or false 
+        username: 'vasya',
+        password: 'password',
+        realm: 'My company'
     },
     processing: {
         totalAttempts: 2,
         playGreeting: true,
-        playBeepBeforeRecording: false
+        playBeepBeforeRecording: false   //use system beep
     },
     asterisk: {
         sounds: {
             onErrorBeforeFinish: 'invalid',
             onErrorBeforeRepeat: 'invalid',
-            greeting: 'tt-monkeysintro'
+            greeting: 'beep'
         },
         recognitionDialplanVars: {
             status: 'RECOGNITION_RESULT',
@@ -96,9 +100,9 @@ Configuration
     },
     recognize: {
         directory: '/tmp',
-        type: 'google',  // ['yandex', 'google']
+        type: 'witai',    // ['yandex', 'google', 'witai']
         options: {
-            developer_key: 'dev_key'
+            developer_key: '6SQV3DEGQWIXW3R2EDFUMPQCVGOEIBCR'
         }
     },
     lookup: {
@@ -110,13 +114,13 @@ Configuration
     logger: {
         console: {
             colorize: true
-        },        
+        },
         file: {
             filename: '/var/log/voicer.log',
             json: false
         }
     }
-}
+};
 
 ``````
 
@@ -170,8 +174,10 @@ Yandex API key: https://developer.tech.yandex.ru/
 
 Google API key: https://console.developers.google.com/
 
-Voice speed dial on Asterisk http://habrahabr.ru/post/248263/  (russian)
+Wit.ai API key: http://wit.ai
 
+
+Voice speed dial on Asterisk http://habrahabr.ru/post/248263/  (russian)
 
 
 Development
