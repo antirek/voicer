@@ -64,8 +64,7 @@ describe('FileSource', function () {
 
         fileSource.lookup('Дмитриев')
             .fail(function (err) {
-                console.log(err);                       
-                expect(err instanceof SyntaxError).toBe(true);
+                expect(err instanceof JSONError).toBe(true);
                 done();
             });
     });
