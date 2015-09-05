@@ -64,7 +64,7 @@ describe('FileSource', function () {
 
         fileSource.lookup('Дмитриев')
             .fail(function (err) {
-                expect(err instanceof JSONError).toBe(true);
+                expect(err instanceof Error).toBe(true);
                 done();
             });
     });
