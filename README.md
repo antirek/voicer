@@ -1,7 +1,7 @@
 voicer
 ======
 
-AGI voice recognizer for Asterisk [use Yandex or Google ASR]
+AGI voice recognizer for Asterisk [use Yandex, Google or Wit.ai ASR online services]
 
 Call to special extension, say "Vasya" and Asterisk connect you with Vasya! Excellent!
 
