@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo mkdir -p /etc/voicer && \
-sudo cp -f ./config.js /etc/voicer/config.js
+sudo --user=0 mkdir -p /etc/voicer && \
+sudo --user=0 cp -f ./config.js /etc/voicer/config.js
