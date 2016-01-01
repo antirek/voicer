@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p /etc/voicer && \
+cp config.js /etc/voicer/config.js
