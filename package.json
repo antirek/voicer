@@ -1,6 +1,6 @@
 {
   "name": "voicer",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "test": "jasmine",
-    "preinstall": "cp -f config.js /etc/voicer/config.js"
+    "preinstall": "mkdir /etc/voicer && cp config.js /etc/voicer/config.js"
   },
   "repository": {
     "type": "git",
