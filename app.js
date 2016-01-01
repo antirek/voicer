@@ -1,7 +1,13 @@
 
-var configfile = process.env.VIOLA_CDR_CONFIG || './config';
-var config = require(configfile);
-var Voicer = require('../index');
+var configfile = process.env.VOICER_CONFIGFILE || './config';
+var fileExists = require('file-exists');
 
-var voicer = new Voicer(config);
-voicer.start();
+if (fileExists(configfile + '.js')) {
+  var config = require(configfile);
+  var Voicer = require('./index');
+
+  var voicer = new Voicer(config);
+  voicer.start();
+} else {
+  console.log('no configfile');
+}

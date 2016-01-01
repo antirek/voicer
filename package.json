@@ -1,10 +1,11 @@
 {
   "name": "voicer",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
     "ding-dong": "0.1.1",
+    "file-exists": "^1.0.0",
     "google-speech": "0.0.2",
     "joi": "^6.6.1",
     "node-uuid": "^1.4.2",
@@ -34,7 +35,7 @@
     "url": "https://github.com/antirek/voicer/issues"
   },
   "homepage": "https://github.com/antirek/voicer",
-  "bin" : {
+  "bin": {
     "voicer": "./app.js"
   }
 }
