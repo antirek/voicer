@@ -45,6 +45,15 @@ config.js set env var VOICER_CONFIGFILE or must be in current dir
 
 > $ voicer
 
+set env var:
+`````
+ export VOICER_CONFIGFILE=/etc/voicer/config.js
+`````
+
+remove
+`````
+ unset VOICER_CONFIGFILE
+`````
 
 
 Configuration
