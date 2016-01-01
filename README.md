@@ -36,12 +36,12 @@ Use
 
 ## Config 
 
-1. create config.js (see @configuration) 
+create config.js (see @configuration) 
 
 
 ## Run
 
-config.js set env var VOICER_CONFIGFILE or must be in cureent dir
+config.js set env var VOICER_CONFIGFILE or must be in current dir
 
 > $ voicer
 
