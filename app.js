@@ -1,3 +1,4 @@
+#!/usr/bin/node
 
 var configfile = process.env.VOICER_CONFIGFILE || './config';
 var fileExists = require('file-exists');
