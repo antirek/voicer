@@ -25,41 +25,25 @@ RECOGNITION_RESULT and RECOGNITION_TARGET.
 
 
 
-Fast start
-==========
-
-Use voicer-app http://github.com/antirek/voicer-app
-
-
-
 Use 
 ===
-
-in your work dir
 
 
 ## Install ##
 
-> $ npm install voicer [--save]
+> $ npm install voicer -g [--save]
 
 
-## Write app.js ##
+## Config 
 
-Add to your **app.js** code
+1. create config.js (see @configuration) 
 
-`````
-var config = require('./config');
-var Voicer = require('voicer');
 
-var voicer = new Voicer(config);
-voicer.start();
+## Run
 
-`````
+config.js set env var VOICER_CONFIGFILE or must be in cureent dir
 
-## Start *voicer* server ##
-
-> $ node app.js
-
+> $ voicer
 
 
 
