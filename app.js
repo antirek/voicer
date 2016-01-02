@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/nodejs
 
 var configfile = process.env.VOICER_CONFIGFILE || './config';
 var fileExists = require('file-exists');
