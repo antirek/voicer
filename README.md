@@ -33,27 +33,11 @@ Use
 
 > $ npm install voicer -g [--save]
 
-
-## Config 
-
-create config.js (see @configuration) 
-
-
 ## Run
 
-config.js set env var VOICER_CONFIGFILE or must be in current dir
+use npm config for store config opts
 
-> $ voicer
-
-set env var:
-`````
- export VOICER_CONFIGFILE=/etc/voicer/config.js
-`````
-
-remove
-`````
- unset VOICER_CONFIGFILE
-`````
+> voicer
 
 
 Configuration
@@ -184,8 +168,3 @@ Development
 ## Test ##
 
 > npm test
-
-
-## Code coverage ##
-
-> grunt

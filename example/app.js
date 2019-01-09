@@ -1,6 +1,6 @@
 
-var config = require('./config');
-var Voicer = require('../index');
+const config = require('./config');
+const Voicer = require('../index');
 
-var voicer = new Voicer(config);
+const voicer = new Voicer(config);
 voicer.start();

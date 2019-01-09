@@ -5,6 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "ding-dong": "0.1.1",
+    "eslint": "^5.12.0",
+    "eslint-config-google": "^0.11.0",
     "file-exists": "^1.0.0",
     "google-speech": "0.0.2",
     "joi": "^6.6.1",
@@ -21,7 +23,8 @@
     "jasmine": "^2.2.1"
   },
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "lint": "eslint --fix ."
   },
   "repository": {
     "type": "git",
