@@ -1,15 +1,8 @@
 #!/usr/bin/nodejs
 
-var configfile = process.env.VOICER_CONFIGFILE || './config';
-var fileExists = require('file-exists');
-var conf = configfile + '.js';
+const config = require('config');
 
-if (fileExists(conf)) {
-  var config = require(configfile);
-  var Voicer = require('./index');
+var Voicer = require('./index');
 
-  var voicer = new Voicer(config);
-  voicer.start();
-} else {
-  console.log('no configfile:', conf);
-}
+var voicer = new Voicer(config);
+voicer.start();

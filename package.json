@@ -1,6 +1,6 @@
 {
   "name": "voicer",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
@@ -8,9 +8,9 @@
     "file-exists": "^1.0.0",
     "google-speech": "0.0.2",
     "joi": "^6.6.1",
-    "node-uuid": "^1.4.2",
     "parse-json": "^2.0.0",
     "q": "^1.2.0",
+    "uuid": "^3.3.2",
     "voicer-web": "0.0.5",
     "winston": "^0.9.0",
     "witai-speech": "0.0.1",
@@ -18,8 +18,6 @@
     "yandex-speech": "^0.0.11"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-jasmine-node-istanbul": "0.0.5",
     "jasmine": "^2.2.1"
   },
   "scripts": {

@@ -11,11 +11,10 @@ var RecognizerFactory = require('./lib/recognize/recognizerFactory');
 
 var VoicerWeb = require('voicer-web');
 
-var Server = function (config) {
-
+var Server = (config) => {
     var logger;
 
-    var log = function (text, object) {
+    var log = (text, object) => {
         if (logger) {
             logger.info(text, object);
         } else {
