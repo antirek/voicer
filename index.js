@@ -28,7 +28,7 @@ const Server = (config) => {
 
   const init = function() {
     const source = (new SourceFactory(config['lookup'])).make();
-    const recognizer = (new RecognizerFactory(config['recognize'])).make();
+    const recognizer = (RecognizerFactory(config['recognize'])).make();
 
     const handler = new Handler(source, recognizer, config);
 
@@ -46,7 +46,7 @@ const Server = (config) => {
     log('server started');
   };
 
-  this.start = function() {
+  start = function() {
     validate(function(err, value) {
       if (err) {
         log('config.js have errors', err);
@@ -56,6 +56,8 @@ const Server = (config) => {
       }
     });
   };
+
+  return { start }
 };
 
 module.exports = Server;
