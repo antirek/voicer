@@ -4,6 +4,7 @@
   "description": "voicer - voice recognition service for asterisk",
   "main": "index.js",
   "dependencies": {
+    "@hapi/joi": "^15.1.1",
     "config": "^3.0.1",
     "ding-dong": "0.1.1",
     "eslint": "^5.12.0",
@@ -13,6 +14,7 @@
     "joi": "^14.3.1",
     "parse-json": "^2.0.0",
     "q": "^1.2.0",
+    "tracer": "^1.0.0",
     "uuid": "^3.3.2",
     "voicer-web": "0.0.5",
     "winston": "^0.9.0",
@@ -21,10 +23,11 @@
     "yandex-speech": "^0.0.11"
   },
   "devDependencies": {
-    "jasmine": "^2.2.1"
+    "jest": "^24.9.0"
   },
   "scripts": {
-    "test": "jasmine",
+    "start": "node app",
+    "test": "jest",
     "lint": "eslint --fix ."
   },
   "repository": {

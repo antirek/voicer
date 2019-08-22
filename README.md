@@ -91,15 +91,6 @@ Configuration
         options: {
             dataFile: 'data/peernames.json'
         }
-    },
-    logger: {
-        console: {
-            colorize: true
-        },
-        file: {
-            filename: '/var/log/voicer.log',
-            json: false
-        }
     }
 };
 
