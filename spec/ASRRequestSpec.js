@@ -41,7 +41,7 @@ describe('ASRRequest', function() {
     const asr = new ASRRequest(services['good'], key, defaults);
 
     asr.load()
-        .fail((error) => {
+        .catch((error) => {
           expect(error).toEqual(new Error('No file'));
           done();
         });
@@ -51,7 +51,7 @@ describe('ASRRequest', function() {
     const asr = new ASRRequest(services['forbidden'], key, defaults);
 
     asr.load(file)
-        .fail((error) => {
+        .catch((error) => {
           expect(error).toEqual(
               new Error('ASRRequest. 403. Forbidden. Check developer key'));
           done();
@@ -62,7 +62,7 @@ describe('ASRRequest', function() {
     const asr = new ASRRequest(services['fail'], key, defaults);
 
     asr.load(file)
-        .fail((error) => {
+        .catch((error) => {
           expect(error).toEqual(expectedError);
           done();
         });

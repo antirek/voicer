@@ -25,7 +25,7 @@ describe('YandexParser', function() {
 
   it('check yandexParser parse not_so_good result', function(done) {
     parser.parse(result.not_so_good)
-        .fail(function(error) {
+        .catch(function(error) {
           expect(error).toEqual(new Error('Parse: no result'));
           done();
         });
@@ -33,7 +33,7 @@ describe('YandexParser', function() {
 
   it('check yandexParser parse empty result', function(done) {
     parser.parse(result.empty)
-        .fail(function(error) {
+        .catch(function(error) {
           expect(error).toEqual(new Error('Parse: no result'));
           done();
         });
@@ -41,7 +41,7 @@ describe('YandexParser', function() {
 
   it('check yandexParser parse bad result', function(done) {
     parser.parse(result.bad)
-        .fail(function(error) {
+        .catch(function(error) {
           expect(error).toEqual(new Error('Parse: no result'));
           done();
         });
