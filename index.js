@@ -11,53 +11,49 @@ const RecognizerFactory = require('./lib/recognize/recognizerFactory');
 
 const VoicerWeb = require('voicer-web');
 
-const Server = (config) => {
-  let logger;
+class Server {
+  constructor (config) {
+    this.config = config;
+  }
 
-  const log = (text, object) => {
-    if (logger) {
-      logger.info(text, object);
+  log (text, object) {
+    if (this.logger) {
+      this.logger.info(text, object);
     } else {
       console.log(text, object);
     }
   };
 
-  const validate = function(callback) {
-    Joi.validate(config, ConfigSchema, callback);
-  };
+  init () {
+    const source = (new SourceFactory(this.config['lookup'])).make();
+    const recognizer = (RecognizerFactory(this.config['recognize'])).make();
 
-  const init = function() {
-    const source = (new SourceFactory(config['lookup'])).make();
-    const recognizer = (RecognizerFactory(config['recognize'])).make();
+    const handler = new Handler(source, recognizer, this.config);
 
-    const handler = new Handler(source, recognizer, config);
-
-    if (config['logger']) {
-      logger = new Logger(config['logger']);
-      handler.setLogger(logger);
+    if (this.config['logger']) {
+      this.logger = new Logger(this.config['logger']);
+      handler.setLogger(this.logger);
     }
 
     const agiServer = new AGIServer(handler.handle);
-    agiServer.start(config.agi['port']);
+    agiServer.start(this.config.agi['port']);
 
-    const voicerWeb = new VoicerWeb(source, config['web']);
+    const voicerWeb = new VoicerWeb(source, this.config['web']);
     voicerWeb.start();
 
-    log('server started');
+    this.log('server started');
   };
 
-  start = function() {
-    validate(function(err, value) {
-      if (err) {
-        log('config.js have errors', err);
-      } else {
-        log('config.js validated successfully!');
-        init();
-      }
-    });
+  start () {
+    const result = Joi.validate(this.config, ConfigSchema);
+    if (result.error) {
+      this.log('error'. result.error);
+      process.exit(1);
+    }
+  
+    this.init();
   };
 
-  return { start }
 };
 
 module.exports = Server;

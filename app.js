@@ -3,5 +3,5 @@
 const config = require('config');
 const Voicer = require('./index');
 
-const voicer = Voicer(config);
+const voicer = new Voicer(config);
 voicer.start();
