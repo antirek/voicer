@@ -11,7 +11,6 @@
     "eslint-config-google": "^0.11.0",
     "file-exists": "^1.0.0",
     "google-speech": "0.0.2",
-    "joi": "^14.3.1",
     "parse-json": "^2.0.0",
     "q": "^1.2.0",
     "tracer": "^1.0.0",

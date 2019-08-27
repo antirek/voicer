@@ -1,6 +1,5 @@
 
 const YandexParser = require('../lib/recognize/yandexParser');
-// const Q = require('q');
 
 describe('YandexParser', function() {
   const expectedText = 'Лопата';

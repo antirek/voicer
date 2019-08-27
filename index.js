@@ -1,6 +1,6 @@
 
 const AGIServer = require('ding-dong');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 const Handler = require('./lib/handler');
 const Logger = require('./lib/logger');
