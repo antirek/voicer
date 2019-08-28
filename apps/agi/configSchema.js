@@ -6,16 +6,6 @@ const ConfigSchema = Joi.object().keys({
   agi: Joi.object().keys({
     port: Joi.number().integer().min(1).max(65535).required().default('3000'),
   }).required(),
-  web: Joi.object().keys({
-    port: Joi.number().integer().min(1).max(65535).required().default('3100'),
-    auth: Joi.boolean().valid(true, false).default(false),
-    username: Joi.string()
-        .when('auth', {is: true, then: Joi.required().default('admin')}),
-    password: Joi.string()
-        .when('auth', {is: true, then: Joi.required().default('password')}),
-    realm: Joi.string()
-        .when('auth', {is: true, then: Joi.default('voicer web')}),
-  }).required(),
   processing: Joi.object().keys({
     totalAttempts: Joi.number().min(1).max(20).default(2),
     playGreeting: Joi.boolean().default(true),
