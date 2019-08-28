@@ -19,9 +19,8 @@ class Server {
     this.agiServer = new AGIServer(handler.handle);
   } 
 
-
   start(port) {
-    agiServer.start(port);
+    this.agiServer.start(port);
     console.log('agi server started on port', port);
   };
 };
