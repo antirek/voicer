@@ -1,5 +1,6 @@
 
 const uuidv4 = require('uuid/v4');
+const autoBind = require('auto-bind');
 
 class Handler {
   constructor({source, recognizer, config, logger}) {
@@ -11,6 +12,7 @@ class Handler {
     this.logger = logger;
     this.sounds = config.asterisk['sounds'];
     this.dialplanVars = config.asterisk['recognitionDialplanVars'];
+    autoBind(this);    // js костыль для получения this в handle
   }
 
   getCallId() {
@@ -44,7 +46,7 @@ class Handler {
     };
 
     if (this.logger) {
-      recognizer.setLogFunction(log);
+      this.recognizer.setLogFunction(log);
     }
 
     const filename = uuidv4();

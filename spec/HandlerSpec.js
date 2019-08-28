@@ -56,6 +56,7 @@ describe('Handler', function() {
 
   const Context = function() {
     const onEvent = function(event) {
+      console.log('eee');
       expect(['variables', 'error', 'close', 'hangup'])
           .toEqual(jasmine.arrayContaining([event]));
 
@@ -63,15 +64,18 @@ describe('Handler', function() {
     };
 
     const answer = function() {
+      console.log('answer');
       return Q.resolve();
     };
 
     const setVariable = function(variable, value) {
+      console.log('set variable');
       expect([24, 5]).toEqual(jasmine.arrayContaining([value]));
       return Q.resolve();
     };
 
     const streamFile = function(filename, digits) {
+      console.log('stream file');
       return Q.resolve();
     };
 
