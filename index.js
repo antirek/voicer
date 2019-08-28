@@ -12,11 +12,11 @@ const RecognizerFactory = require('./lib/recognize/recognizerFactory');
 const VoicerWeb = require('voicer-web');
 
 class Server {
-  constructor (config) {
+  constructor(config) {
     this.config = config;
   }
 
-  log (text, object) {
+  log(text, object) {
     if (this.logger) {
       this.logger.info(text, object);
     } else {
@@ -24,16 +24,18 @@ class Server {
     }
   };
 
-  init () {
+  init() {
     const source = (new SourceFactory(this.config['lookup'])).make();
     const recognizer = (RecognizerFactory(this.config['recognize'])).make();
 
     const handler = new Handler(source, recognizer, this.config);
 
-    if (this.config['logger']) {
-      this.logger = new Logger(this.config['logger']);
-      handler.setLogger(this.logger);
-    }
+    this.logger = new Logger({
+      console: {
+        colorize: true,
+      },
+    });
+    handler.setLogger(this.logger);
 
     const agiServer = new AGIServer(handler.handle);
     agiServer.start(this.config.agi['port']);
@@ -44,16 +46,15 @@ class Server {
     this.log('server started');
   };
 
-  start () {
+  start() {
     const result = Joi.validate(this.config, ConfigSchema);
     if (result.error) {
       this.log('error'. result.error);
       process.exit(1);
     }
-  
+
     this.init();
   };
-
 };
 
 module.exports = Server;

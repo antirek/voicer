@@ -12,7 +12,6 @@
     "file-exists": "^1.0.0",
     "google-speech": "0.0.2",
     "parse-json": "^2.0.0",
-    "q": "^1.2.0",
     "tracer": "^1.0.0",
     "uuid": "^3.3.2",
     "voicer-web": "0.0.5",
