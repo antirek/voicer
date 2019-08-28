@@ -5,20 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "@hapi/joi": "^15.1.1",
-    "angular": "^1.4.0",
-    "angular-resource": "^1.4.0",
-    "bootstrap": "^3.4.1",
     "config": "^3.0.1",
     "ding-dong": "0.1.1",
     "eslint": "^5.12.0",
     "eslint-config-google": "^0.11.0",
-    "express": "^4.17.1",
     "file-exists": "^1.0.0",
     "google-speech": "0.0.2",
-    "jquery": "^3.4.1",
     "parse-json": "^2.0.0",
-    "pug": "^2.0.4",
-    "serve-favicon": "^2.5.0",
     "tracer": "^1.0.0",
     "uuid": "^3.3.2",
     "winston": "^0.9.0",
@@ -31,7 +24,6 @@
   },
   "scripts": {
     "start": "node bin/agi",
-    "start-web": "node bin/web",
     "test": "jest",
     "lint-fix": "eslint --fix ."
   },
@@ -46,7 +38,6 @@
   },
   "homepage": "https://github.com/antirek/voicer",
   "bin": {
-    "voicer": "./bin/agi.js",
-    "voicer-web": "./bin/web.js"
+    "voicer": "./bin/agi.js"
   }
 }
