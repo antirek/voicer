@@ -1,5 +1,5 @@
 
-const Validator = require('../lib/source/validator');
+const Validator = require('../apps/agi/source/validator');
 
 describe('Validator', function() {
   const validator = new Validator();

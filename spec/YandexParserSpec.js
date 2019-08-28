@@ -1,5 +1,5 @@
 
-const YandexParser = require('../lib/recognize/yandexParser');
+const YandexParser = require('../apps/agi/recognize/yandexParser');
 
 describe('YandexParser', function() {
   const expectedText = 'Лопата';

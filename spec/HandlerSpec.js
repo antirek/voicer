@@ -1,5 +1,5 @@
 const Q = require('q');
-const Handler = require('../lib/handler');
+const Handler = require('../apps/agi/handler');
 
 
 describe('Handler', function() {
@@ -85,7 +85,7 @@ describe('Handler', function() {
 
   it('standard flow', function(done) {
     context = new Context();
-    handler = new Handler(source, recognizer, config);
+    handler = new Handler({source, recognizer, config});
 
     handler.handle(context);
     done();

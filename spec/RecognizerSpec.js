@@ -1,5 +1,5 @@
 
-const Recognizer = require('../lib/recognize/recognizer');
+const Recognizer = require('../apps/agi/recognize/recognizer');
 const Q = require('q');
 
 describe('Recognizer', function() {

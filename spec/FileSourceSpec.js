@@ -1,6 +1,6 @@
-const FileSource = require('../lib/source/fileSource');
+const FileSource = require('../apps/agi/source/fileSource');
 const Q = require('q');
-const Validator = require('../lib/source/validator');
+const Validator = require('../apps/agi/source/validator');
 
 describe('FileSource', function() {
   const expectedObject = {'name': 'Дмитриев', 'target': 'SIP/1234',

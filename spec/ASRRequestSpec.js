@@ -1,4 +1,4 @@
-const ASRRequest = require('../lib/recognize/asrRequest');
+const ASRRequest = require('../apps/agi/recognize/asrRequest');
 // const Q = require('q');
 
 describe('ASRRequest', function() {

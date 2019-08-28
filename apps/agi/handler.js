@@ -2,13 +2,13 @@
 const uuidv4 = require('uuid/v4');
 
 class Handler {
-  constructor(source, recognizer, config) {
+  constructor({source, recognizer, config, logger}) {
     this.source = source;
     this.recognizer = recognizer;
     this.config = config;
 
     this.counter = 1;
-    this.logger = null;
+    this.logger = logger;
     this.sounds = config.asterisk['sounds'];
     this.dialplanVars = config.asterisk['recognitionDialplanVars'];
   }
@@ -20,11 +20,6 @@ class Handler {
       return ([1e15]+a).slice(-b);
     };
     return q(this.counter++, length);
-  };
-
-
-  setLogger(logger) {
-    this.logger = logger;
   };
 
   handle(context) {

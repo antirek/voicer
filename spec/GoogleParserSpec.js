@@ -1,5 +1,5 @@
 
-const GoogleParser = require('../lib/recognize/googleParser');
+const GoogleParser = require('../apps/agi/recognize/googleParser');
 
 describe('GoogleParser', () => {
   const expectedText = 'лопата';
