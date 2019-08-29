@@ -1,4 +1,5 @@
-#!/usr/bin/node
+#!/usr/bin/env node
+
 const program = require('commander');
 const path = require('path');
 const Voicer = require('./../apps/agi/index');

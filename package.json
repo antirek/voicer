@@ -1,8 +1,7 @@
 {
   "name": "voicer",
-  "version": "0.2.0",
-  "description": "voicer - voice recognition service for asterisk",
-  "main": "index.js",
+  "version": "0.2.1",
+  "description": "voicer - voice recognition AGI server for Asterisk",  
   "dependencies": {
     "@hapi/joi": "^15.1.1",
     "auto-bind": "^2.1.0",
