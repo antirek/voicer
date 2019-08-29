@@ -7,6 +7,7 @@ class FileReader {
 
   readFile() {
     return new Promise((resolve, reject) => {
+      console.log('read file', this.filepath);
       fs.readFile(this.filepath, 'utf8', (err, data) => {
         if (err) {
           reject(err);

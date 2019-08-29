@@ -6,6 +6,7 @@
   "dependencies": {
     "@hapi/joi": "^15.1.1",
     "auto-bind": "^2.1.0",
+    "commander": "^3.0.0",
     "config": "^3.0.1",
     "ding-dong": "0.1.7",
     "eslint": "^5.12.0",

@@ -32,6 +32,7 @@ class FileSource {
     return new Promise((resolve, reject) => {
       try {
         const json = parseJson(data, 'peernames.json');
+        console.log('parsed', json);
         resolve(json);
       } catch (err) {
         reject(err);
@@ -46,14 +47,6 @@ class FileSource {
         .then((data) => {
           return this.find(text, data);
         });
-  };
-
-  getData() {
-    return this.fileReader.readFile();
-  };
-
-  saveData(data) {
-    return this.fileReader.writeFile(data);
   };
 };
 

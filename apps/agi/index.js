@@ -68,9 +68,8 @@ class Server {
 
   start() {
     const port = this.config.agi.port;
-    
     this.agiServer.start(port);
-    console.log('agi server started on port', port);
+    console.log('agi server started on port', port, 'with config', this.config);
   };
 };
 
