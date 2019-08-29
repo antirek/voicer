@@ -1,5 +1,4 @@
 const FileSource = require('../apps/agi/source/fileSource');
-const Q = require('q');
 const Validator = require('../apps/agi/source/validator');
 
 describe('FileSource', function() {
@@ -16,9 +15,7 @@ describe('FileSource', function() {
 
   const FileReader = function(content) {
     this.readFile = function() {
-      const defer = Q.defer();
-      defer.resolve(content);
-      return defer.promise;
+      return Promise.resolve(content);
     };
   };
 
@@ -33,7 +30,7 @@ describe('FileSource', function() {
           expect(result).toEqual(expectedObject);
           done();
         })
-        .fail(function(err) {
+        .catch(function(err) {
           console.log('1234', err);
         });
   });
@@ -43,7 +40,7 @@ describe('FileSource', function() {
         validator);
 
     fileSource.lookup('Дмитриев')
-        .fail(function(error) {
+        .catch(function(error) {
           expect(error instanceof Error).toBe(true);
           done();
         });
@@ -56,7 +53,7 @@ describe('FileSource', function() {
     );
 
     fileSource.lookup('Дмитриев')
-        .fail(function(error) {
+        .catch(function(error) {
           expect(error instanceof Error).toBe(true);
           done();
         });
@@ -66,7 +63,7 @@ describe('FileSource', function() {
     const fileSource = new FileSource(new FileReader(content.bad), validator);
 
     fileSource.lookup('Дмитриев')
-        .fail(function(err) {
+        .catch(function(err) {
           expect(err instanceof Error).toBe(true);
           done();
         });

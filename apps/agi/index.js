@@ -14,8 +14,8 @@ const defaults = {
   },
   processing: {
     totalAttempts: 2,
-    playGreeting: true,
-    playBeepBeforeRecording: false, // use system beep
+    playGreeting: false,
+    playBeepBeforeRecording: true, // use system beep
   },
   asterisk: {
     sounds: {
@@ -31,7 +31,7 @@ const defaults = {
   record: {
     directory: '/var/records/recognize',
     type: 'wav',
-    duration: 2,
+    duration: 3,
   },
   recognize: {
     directory: '/mnt/records',

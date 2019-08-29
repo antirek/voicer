@@ -1,6 +1,5 @@
 
 const Recognizer = require('../apps/agi/recognize/recognizer');
-const Q = require('q');
 
 describe('Recognizer', function() {
   const file = 'file';
@@ -9,13 +8,13 @@ describe('Recognizer', function() {
 
   const asrRequest = {
     load: function(file) {
-      return Q.resolve(textInFile);
+      return Promise.resolve(textInFile);
     },
   };
 
   const parser = {
     parse: function(text) {
-      return Q.resolve(parsedValue);
+      return Promise.resolve(parsedValue);
     },
   };
 
@@ -29,16 +28,6 @@ describe('Recognizer', function() {
     log.push({text: text, object: object});
   };
 
-  it('check recognizer work', function(done) {
-    const recognizer = new Recognizer(asrRequest, parser);
-
-    recognizer.recognize(file)
-        .then(function(value) {
-          expect(value).toBe(parsedValue);
-          done();
-        });
-  });
-
   it('check recognizer work and log', function(done) {
     const recognizer = new Recognizer(asrRequest, parser);
     recognizer.setLogFunction(logFunction);
@@ -47,6 +36,7 @@ describe('Recognizer', function() {
         .then(function(value) {
           expect(log).toEqual(expectedLog);
           done();
-        });
+        })
+        .catch(err => console.log(err));
   });
 });

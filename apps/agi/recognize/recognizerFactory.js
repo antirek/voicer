@@ -32,11 +32,22 @@ const Recognizers = {
   },
   witai: (options) => {
     const Asr = require('witai-speech').ASR;
-    const asr = new Asr(options['developer_key']);
+    const asr = new Asr({token: options['developer_key']});
 
     const q = {
-      ASR: (options) => {
-        return asr.recognize(options.file);
+      ASR: (options, cb) => {
+        return asr.recognize(options.file)
+          .then((res) => {
+            console.log('res', res);
+            return res.json();
+          }).then(json => {
+            console.log('json', json);
+            cb(null, json);
+          })
+          .catch(err => {
+            console.log('err', err);
+            cb(err);
+          })
       },
     };
 

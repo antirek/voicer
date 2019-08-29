@@ -28,36 +28,33 @@ class Handler {
     const callId = this.getCallId();
     let currentAttempt = 1;
 
-    const totalAttempts = this.config.processing['totalAttempts'] || 1;
+    const totalAttempts = this.config.processing['totalAttempts'];
 
     /**
      *
      * @param {*} message
      * @param {*} object
      */
-    const log = (message, object) => {
-      if (this.logger) {
+    const log = (message, object) => {      
         if (object) {
           this.logger.info(callId, message, object);
         } else {
           this.logger.info(callId, message);
         }
-      }
     };
-
-    if (this.logger) {
-      this.recognizer.setLogFunction(log);
-    }
-
+    this.recognizer.setLogFunction(log);
     const filename = uuidv4();
 
     const stepGreeting = () => {
       log('stepGreeting');
       return context.answer()
           .then(() => {
+            log('answer');
             if (this.config.processing['playGreeting']) {
-              return context.streamFile(sounds['greeting'], '#');
+              log('o')
+              return context.streamFile(this.sounds['greeting'], '#');
             } else {
+              log('b')
               return Promise.resolve();
             }
           });
@@ -70,6 +67,7 @@ class Handler {
       const beep = (this.config.processing['playBeepBeforeRecording']) ? 'beep' : '';
 
       log('stepRecord', filepath);
+      log('stepRecord', 'start record');
       return context.recordFile(filepath, conf['type'],
           '#', conf['duration'], 0, beep, '');
     };
@@ -104,19 +102,26 @@ class Handler {
 
     const stepSuccess = (object) => {
       log('stepSuccess', object);
+      log('stepSuccess, set ' + this.dialplanVars['status'] + '=SUCCESS');
       return context.setVariable(this.dialplanVars['status'], 'SUCCESS')
           .then(() => {
+            log('stepSuccess, set ' + this.dialplanVars['target'] + '=' + object.target);
             return context.setVariable(this.dialplanVars['target'], object.target);
           });
     };
 
     const stepSetFailedVars = () => {
       log('stepSetFailedVars');
+      log('set', this.dialplanVars['status'] + '=FAILED');
       return context.setVariable(this.dialplanVars['status'], 'FAILED');
     };
 
     const FlowProcess = () => {
       return stepRecord()
+          .then(res => {
+            log('stepRecord', 'end record');
+            return res;
+          })
           .then(stepRecognize)
           .then(stepLookup)
           .then(stepSuccess)
@@ -128,10 +133,10 @@ class Handler {
         currentAttempt++;
 
         return promise()
-            .fail((error) => {
+            .catch((error) => {
               return stepErrorBeforeRepeat(error)
                   .then(() => {
-                    log('fail, make next attempt', {
+                    log('---  fail, make next attempt ---', {
                       current: currentAttempt, total: totalAttempts,
                     });
                     return loop(promise);
@@ -139,7 +144,7 @@ class Handler {
             });
       } else {
         return promise()
-            .fail((error) => {
+            .catch((error) => {
               return stepErrorBeforeFinish(error)
                   .then(stepFinish);
             });

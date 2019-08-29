@@ -1,6 +1,4 @@
-const Q = require('q');
 const Handler = require('../apps/agi/handler');
-
 
 describe('Handler', function() {
   let handler;
@@ -11,26 +9,21 @@ describe('Handler', function() {
 
   const source = {
     lookup: function(text) {
-      const defer = Q.defer();
-      defer.resolve(expectedChannel);
-      return defer.promise;
+      return Promise.resolve(expectedChannel);
     },
   };
 
   const recognizer = {
     recognize: function(file) {
-      const defer = Q.defer();
-      defer.resolve(expectedText);
-      return defer.promise;
+      return Promise.resolve(expectedText);
     },
     setLogFunction: function() {},
   };
 
-  /*
+
   const logger = {
     info: function(module, callId, message, object) {},
   };
-  */
 
   const config = {
     processing: {
@@ -45,6 +38,10 @@ describe('Handler', function() {
         greeting: 'tt-monkeysintro',
         beep: 'beep',
       },
+      recognitionDialplanVars: {
+        status: 'RECOGNITION_RESULT',
+        target: 'RECOGNITION_TARGET',
+      },
     },
     record: {
       directory: '/tmp',
@@ -56,40 +53,52 @@ describe('Handler', function() {
 
   const Context = function() {
     const onEvent = function(event) {
-      console.log('eee');
+      
       expect(['variables', 'error', 'close', 'hangup'])
           .toEqual(jasmine.arrayContaining([event]));
 
-      return Q.resolve();
+      return Promise.resolve();
     };
 
     const answer = function() {
-      console.log('answer');
-      return Q.resolve();
+      // console.log('answer');
+      return Promise.resolve();
     };
 
+    
     const setVariable = function(variable, value) {
-      console.log('set variable');
-      expect([24, 5]).toEqual(jasmine.arrayContaining([value]));
-      return Q.resolve();
+      // console.log('set variable');
+      expect(['FAILED']).toEqual(jasmine.arrayContaining([value]));
+      return Promise.resolve();
     };
 
     const streamFile = function(filename, digits) {
-      console.log('stream file');
-      return Q.resolve();
+      // console.log('stream file');
+      return Promise.resolve();
+    };
+
+    const end = function() {
+      // console.log('end');
+      return Promise.resolve();
+    };
+    const recordFile = function() {
+      // console.log('record file');
+      return Promise.resolve();
     };
 
     return {
-      answer: answer,
-      onEvent: onEvent,
-      setVariable: setVariable,
-      streamFile: streamFile,
+      answer,
+      onEvent,
+      setVariable,
+      streamFile,
+      end,
+      recordFile,
     };
   };
 
   it('standard flow', function(done) {
     context = new Context();
-    handler = new Handler({source, recognizer, config});
+    handler = new Handler({source, recognizer, config, logger});
 
     handler.handle(context);
     done();

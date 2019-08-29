@@ -1,9 +1,10 @@
+const autoBind = require('auto-bind');
 
 class Recognizer {
   constructor(asrRequest, parser) {
     this.asrRequest = asrRequest;
     this.parser = parser;
-    this.log = () => {};
+    autoBind(this);
   }
 
   setLogFunction(logFunction) {
@@ -11,13 +12,15 @@ class Recognizer {
   };
 
   recognize(file) {
-    const that = this;
     this.log('file', file);
     return this.asrRequest.load(file)
         .then((text) => {
-          that.log('text', text);
-          return that.parser.parse(text);
-        });
+          this.log('text', text);
+          return this.parser.parse(text);
+        })
+        .catch((err) => {
+          this.log('err', err)
+        })
   };
 };
 
