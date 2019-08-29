@@ -1,5 +1,6 @@
 #!/usr/bin/node
 const program = require('commander');
+const path = require('path');
 const Voicer = require('./../apps/agi/index');
 
 program
@@ -8,7 +9,8 @@ program
   .option('-t, --type [type]', 'recognition service type, like google, yandex, witai')
   .option('-k, --key [key]', 'recognition service auth key')
   .option('-d, --path [path]', 'path to peernames.json')
-  .helpOption('-h, --help', 'read more information');
+  .option('-c, --config [config]', 'path to config.js')
+  .helpOption('-h, --help', 'read more information')
  
 program.parse(process.argv);
 
@@ -17,19 +19,27 @@ if (!program.port) {
     // program.help();
 }
 
-let config = {
-    agi: {
-        port: program.port || 3000,
+let config;
+
+if (program.config) {
+    if (path.resolve(program.config)) {
+        config = require(program.config);
+    }
+} else {
+    config = {
+        agi: {
+            port: program.port || 3000,
+        },
+    record: { directory: program.records || '/var/records', type: 'wav', duration: 3 },
+    recognize: {
+        directory: program.records || '/var/records',
+        type: program.type || 'witai', // ['yandex', 'google', 'witai']
+        options: {
+        developer_key:  program.key || '6SQV3DEGQWIXW3R2EDFUMPQCVGOEIBCR',
+        },
     },
-  record: { directory: program.records || '/var/records', type: 'wav', duration: 3 },
-  recognize: {
-    directory: program.records || '/var/records',
-    type: program.type || 'witai', // ['yandex', 'google', 'witai']
-    options: {
-      developer_key:  program.key || '6SQV3DEGQWIXW3R2EDFUMPQCVGOEIBCR',
-    },
-  },
-};
+    };
+}
 
 // console.log('config', config);
 const voicer = new Voicer(config);
