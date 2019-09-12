@@ -34,9 +34,7 @@ Use
 
 ## Run
 
-use npm config for store config opts
-
-> voicer
+> voicer -p 3000 -t google -k <developer_key> -d /etc/voicer/peernames.json -r /var/records
 
 run with --help for instructions
 
