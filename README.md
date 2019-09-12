@@ -24,20 +24,23 @@ After this voicer return control to dialplan. Build rules of dialplan using
 RECOGNITION_RESULT and RECOGNITION_TARGET.
 
 
-
 Use 
 ===
 
 
 ## Install ##
 
-> $ npm install voicer -g [--save]
+> $ npm install voicer -g
 
 ## Run
 
 use npm config for store config opts
 
 > voicer
+
+run with --help for instructions
+
+> voicer --help
 
 
 Configuration
@@ -50,13 +53,6 @@ Configuration
 {
     agi: {
         port: 3000
-    },
-    web: {
-        port: 3100,
-        auth: true,    // or false 
-        username: 'vasya',
-        password: 'password',
-        realm: 'My company'
     },
     processing: {
         totalAttempts: 2,
@@ -113,27 +109,15 @@ exten=1000,n,Dial(${RECOGNITION_TARGET})
 `````
 [
     ....
-
     {
         "name": "Vasya",
         "target": "SIP/Sf567890",
         "variants": ["vasya", "vasya petrov"]
     },
-    
     ....
-
 ]
 
 `````
-
-
-
-## Some more ##
-
-Also you can tune additional options in *config.js*. 
-
-Try find optimal value for duration of record.
-
 
 ## Errors?! ##
 
@@ -149,7 +133,11 @@ Google API key: https://console.developers.google.com/
 Wit.ai API key: http://wit.ai
 
 
-Voice speed dial on Asterisk http://habrahabr.ru/post/248263/  (russian)
+[Voice speed dial on Asterisk](http://habrahabr.ru/post/248263/)
+
+[New manual](https://habr.com/ru/post/436016/)
+
+[Use with FreePBX](https://voxlink.ru/kb/asterisk-configuration/golosovoj-nabor-v-asterisk/)
 
 
 Development
