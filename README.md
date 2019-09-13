@@ -117,6 +117,9 @@ exten=1000,n,Dial(${RECOGNITION_TARGET})
 
 `````
 
+[Online peernames.json constructor](https://antirek.github.io/voicer-web/)
+
+
 ## Errors?! ##
 
 Bugs?! Oh, contact with me. I want to eat them.
