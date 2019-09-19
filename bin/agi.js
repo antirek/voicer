@@ -31,7 +31,11 @@ if (program.config) {
         agi: {
             port: program.port || 3000,
         },
-    record: { directory: program.records || '/var/records', type: 'wav', duration: 3 },
+    record: { 
+        directory: program.records || '/var/records', 
+        type: 'wav', 
+        duration: 3 
+    },
     recognize: {
         directory: program.records || '/var/records',
         type: program.type || 'witai', // ['yandex', 'google', 'witai']
@@ -39,6 +43,12 @@ if (program.config) {
         developer_key:  program.key || '6SQV3DEGQWIXW3R2EDFUMPQCVGOEIBCR',
         },
     },
+    lookup: {
+        type: 'file',
+        options: {
+            dataFile: program.path || 'data/peernames.json',
+        }
+    }
     };
 }
 
