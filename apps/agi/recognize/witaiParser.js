@@ -6,8 +6,8 @@ class WitaiParser {
         reject(new Error('Parse: input is malformed'));
       }
 
-      if (object['_text']) {
-        resolve(object['_text']);
+      if (object['text']) {
+        resolve(object['text']);
       } else {
         reject(new Error('Parse: no result'));
       }
